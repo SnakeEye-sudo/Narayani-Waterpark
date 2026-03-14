@@ -148,7 +148,27 @@ function applyTranslations() {
 function toggleLanguage() {
   currentLang = currentLang === 'en' ? 'hi' : 'en';
   applyTranslations();
+  initTheme();
 }
+
+// ---- THEME TOGGLE (Dark Mode) ----
+function initTheme() {
+  const savedTheme = localStorage.getItem('park-theme') || 'light';
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    const tb = document.getElementById('themeToggle');
+    if (tb) tb.textContent = '☀️';
+  }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('park-theme', isDark ? 'dark' : 'light');
+  const tb = document.getElementById('themeToggle');
+  if (tb) tb.textContent = isDark ? '☀️' : '🌓';
+}
+
 
 // ---- PRELOADER ----
 window.addEventListener('load', function () {
@@ -157,10 +177,28 @@ window.addEventListener('load', function () {
     applyTranslations();
     checkApril2Promotions();
     initGallerySlider();
-    initWaterEffects(); // Initialize water effects
+    initWaterEffects();
+    initScrollAnimations();
   }, 1400);
 });
 
+function initScrollAnimations() {
+  const revealElements = document.querySelectorAll('.ride-card, .price-card, .gallery-item, .section-header, .about-content, .reveal');
+  
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-active');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
+// ============================================================
+// WATER EFFECTS (Ripples & Bubbles)
+// ============================================================
 // ============================================================
 // WATER EFFECTS (Ripples & Bubbles)
 // ============================================================
@@ -172,7 +210,32 @@ function initWaterEffects() {
   window.addEventListener('mousedown', (e) => createRipple(e, container));
   
   // Occasional bubbles
-  setInterval(() => createBubble(container), 2000);
+  setInterval(() => createBubble(container), 3000);
+
+  // Fish Mascot Following Cursor
+  const mascot = document.getElementById('mascot');
+  if (mascot) {
+    mascot.style.visibility = 'visible';
+    let mouseX = 0, mouseY = 0;
+    let mascotX = 0, mascotY = 0;
+    
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateMascot() {
+      mascotX += (mouseX - mascotX) * 0.08;
+      mascotY += (mouseY - mascotY) * 0.08;
+      
+      // Face direction of travel
+      const flip = (mouseX > mascotX + 5) ? 'scaleX(-1)' : (mouseX < mascotX - 5) ? 'scaleX(1)' : mascot.style.transform.includes('scaleX(-1)') ? 'scaleX(-1)' : 'scaleX(1)';
+      mascot.style.transform = `translate3d(${mascotX - 45}px, ${mascotY - 45}px, 0) ${flip}`;
+      
+      requestAnimationFrame(animateMascot);
+    }
+    animateMascot();
+  }
 }
 
 function createRipple(e, container) {
@@ -288,12 +351,6 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// ---- SCROLL REVEAL ----
-var revealItems = document.querySelectorAll('.reveal');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-revealItems.forEach(function(item) { observer.observe(item); });
 
 
 // ============================================================
@@ -538,6 +595,19 @@ function showToast(msg, type) {
     toast.style.opacity = '0';
     setTimeout(function() { toast.style.display = 'none'; }, 400);
   }, 3500);
+}
+
+
+// ============================================================
+// LEGAL MODALS
+// ============================================================
+function openLegal(id) {
+  document.getElementById(id + 'Modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLegal(id) {
+  document.getElementById(id + 'Modal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 
