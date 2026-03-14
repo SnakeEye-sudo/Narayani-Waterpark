@@ -551,46 +551,49 @@ function showToast(msg, type) {
 // Hash MUST be generated server-side. Until server-side hash is ready, WhatsApp fallback is used.
 // ============================================================
 function proceedToPay() {
-  var name  = document.getElementById('bookingName').value.trim();
-  var phone = document.getElementById('bookingPhone').value.trim();
+  var name    = document.getElementById('bookingName').value.trim();
+  var phone   = document.getElementById('bookingPhone').value.trim();
   var dateStr = document.getElementById('bookingDate').value;
-  var price = getPriceForDate(dateStr);
-  var total = ticketCounts.adult * price;
+  var price   = getPriceForDate(dateStr);
+  var totalTickets = (ticketCounts.adult || 0) + (ticketCounts.child || 0) + (ticketCounts.senior || 0);
+  var total   = totalTickets * price;
 
-  var email = document.getElementById('bookingEmail') ? document.getElementById('bookingEmail').value.trim() : 'guest@narayaniwaterpark.com';
+  var email = (document.getElementById('bookingEmail') || {}).value || '';
+  email = email.trim();
+  if (!email) email = 'guest@narayaniwaterpark.com';
 
   if (!name)  { showToast(currentLang==='hi'?'कृपया अपना नाम लिखें!':'Please enter your name!', 'error'); return; }
-  if (!phone || phone.replace(/\D/g,'').length < 10) { showToast(currentLang==='hi'?'कृपया सही मोबाइल नंबर लिखें!':'Please enter a valid mobile number!', 'error'); return; }
-  if (!email || !email.includes('@')) { showToast(currentLang==='hi'?'कृपया सही ईमेल लिखें!':'Please enter a valid email!', 'error'); return; }
+  if (!phone || phone.replace(/\D/g,'').length < 10) { showToast(currentLang==='hi'?'कृपया सही मोबाइल नंबर लिखें!':'Please enter a valid 10-digit mobile number!', 'error'); return; }
   if (!dateStr) { showToast(currentLang==='hi'?'कृपया यात्रा की तारीख चुनें!':'Please select your visit date!', 'error'); return; }
-  if (total === 0) { showToast(currentLang==='hi'?'कृपया कम से कम एक टिकट चुनें!':'Please select at least one ticket!', 'error'); return; }
+  if (total === 0) { showToast(currentLang==='hi'?'कृपया कम से कम एक टिकट चुनें!':'Please select at least 1 ticket!', 'error'); return; }
 
   var txnId = 'NWP' + Date.now();
-  var productInfo = 'NWP-Tickets Count:' + ticketCounts.adult + ' Date:' + dateStr;
+  var ticketDesc = [];
+  if (ticketCounts.adult  > 0) ticketDesc.push('Adult x' + ticketCounts.adult);
+  if (ticketCounts.child  > 0) ticketDesc.push('Child x' + ticketCounts.child);
+  if (ticketCounts.senior > 0) ticketDesc.push('Senior x' + ticketCounts.senior);
+  var productInfo = 'NWP ' + ticketDesc.join(',') + ' Date:' + dateStr;
+  var formattedTotal = Number(total).toFixed(2);
 
-  document.getElementById('txnid').value = txnId;
-  document.getElementById('payuAmount').value = total;
+  document.getElementById('txnid').value       = txnId;
+  document.getElementById('payuAmount').value  = formattedTotal;
   document.getElementById('productinfo').value = productInfo;
-  document.getElementById('payuName').value = name;
-  document.getElementById('payuPhone').value = phone;
-  document.getElementById('payuEmail').value = email;
-
-  // Set absolute surl and furl dynamically
-  document.querySelector('input[name="surl"]').value = window.location.origin + '/api/payu/success';
-  document.querySelector('input[name="furl"]').value = window.location.origin + '/api/payu/failure';
+  document.getElementById('payuName').value    = name;
+  document.getElementById('payuPhone').value   = phone;
+  document.getElementById('payuEmail').value   = email;
 
   var btn = document.querySelector('.pay-btn');
-  var origText = btn.innerHTML;
-  btn.innerHTML = '⏳ Processing...';
-  btn.disabled = true;
+  var origText = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '⏳ Processing...'; btn.disabled = true; }
 
-  // Format amount precisely as a String for PayU (needs to match hash exactly)
-  var formattedTotal = String(Number(total).toFixed(2));
-  document.getElementById('payuAmount').value = formattedTotal;
+  // Fetch hash from Netlify Function
+  var controller = new AbortController();
+  var timeoutId  = setTimeout(function() { controller.abort(); }, 15000); // 15s timeout
 
-  fetch('/api/payu/hash', {
+  fetch('/api/payu-hash', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    signal: controller.signal,
     body: JSON.stringify({
       txnId: txnId,
       amount: formattedTotal,
@@ -600,23 +603,28 @@ function proceedToPay() {
       phone: phone
     })
   })
-  .then(res => res.json())
-  .then(data => {
-    if(data.hash) {
+  .then(function(res) {
+    clearTimeout(timeoutId);
+    if (!res.ok) throw new Error('Server returned ' + res.status);
+    return res.json();
+  })
+  .then(function(data) {
+    if (data.hash && data.key) {
       document.getElementById('payuHash').value = data.hash;
-      document.getElementById('payuKey').value = data.key;
+      document.getElementById('payuKey').value  = data.key;
       document.getElementById('payuForm').submit();
     } else {
-      showToast('Error generating secure payment hash.', 'error');
-      btn.innerHTML = origText;
-      btn.disabled = false;
+      throw new Error(data.error || 'Hash missing in response');
     }
   })
-  .catch(err => {
-    console.error(err);
-    showToast('Network error while processing payment.', 'error');
-    btn.innerHTML = origText;
-    btn.disabled = false;
+  .catch(function(err) {
+    clearTimeout(timeoutId);
+    console.error('PayU hash error:', err.message);
+    var msg = err.name === 'AbortError'
+      ? 'Request timed out. Please retry.'
+      : ('Error: ' + err.message);
+    showToast(msg, 'error');
+    if (btn) { btn.innerHTML = origText; btn.disabled = false; }
   });
 }
 

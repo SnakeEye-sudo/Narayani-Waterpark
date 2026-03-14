@@ -1,52 +1,87 @@
-const { createClient } = require('@supabase/supabase-client');
+// Contact form — stores in Supabase OR falls back to logging
+// Uses native fetch (Node 18+, available on Netlify)
 
-// Initialize Supabase client
-const supabase = createClient(
-    process.env.SUPABASE_URL || 'YOUR_SUPABASE_URL',
-    process.env.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY'
-);
+const CORS_HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
+};
 
 exports.handler = async (event) => {
-    if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, body: 'Method Not Allowed' };
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: CORS_HEADERS, body: '' };
+  }
+
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+  }
+
+  try {
+    const { name, email, phone, subject, message } = JSON.parse(event.body || '{}');
+
+    if (!name || !phone || !message) {
+      return {
+        statusCode: 400,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({ error: 'Name, phone, and message are required' })
+      };
     }
 
-    try {
-        const { name, email, phone, subject, message } = JSON.parse(event.body);
+    // Log the contact (always works even without Supabase)
+    console.log(`=== Contact Form Submission ===
+Name:    ${name}
+Phone:   ${phone}
+Email:   ${email || 'N/A'}
+Subject: ${subject || 'General'}
+Message: ${message}
+Time:    ${new Date().toISOString()}
+==============================`);
 
-        if (!name || !phone || !message) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify({ error: 'Name, phone, and message are required' })
-            };
+    // Try to save to Supabase if configured
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_ANON_KEY;
+
+    if (supabaseUrl && supabaseKey) {
+      try {
+        const resp = await fetch(`${supabaseUrl}/rest/v1/contacts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ name, email, phone, subject, message })
+        });
+
+        if (!resp.ok) {
+          const err = await resp.text();
+          console.error('Supabase insert error:', err);
+        } else {
+          console.log('Saved to Supabase successfully');
         }
-
-        // Store in Supabase
-        const { data, error } = await supabase
-            .from('contacts')
-            .insert([{ name, email, phone, subject, message, created_at: new Date() }]);
-
-        if (error) {
-            console.error('Supabase Error:', error);
-            // We still return success: false but log the error
-            return {
-                statusCode: 200, // Still return 200 but with error in body to allow frontend fallback
-                body: JSON.stringify({ success: false, error: 'Failed to save to database' })
-            };
-        }
-
-        // Optional: Send email notification here (e.g., via SendGrid or Postmark)
-
-        return {
-            statusCode: 200,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ success: true, message: 'Message recorded successfully' })
-        };
-    } catch (error) {
-        console.error('Contact Form Error:', error);
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Internal Server Error' })
-        };
+      } catch (dbErr) {
+        console.error('Supabase connection failed:', dbErr.message);
+        // Don't fail the whole request — form still submitted
+      }
+    } else {
+      console.warn('Supabase not configured — contact logged but not stored in DB');
     }
+
+    return {
+      statusCode: 200,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ success: true, message: 'Message received! We will contact you soon.' })
+    };
+
+  } catch (err) {
+    console.error('Contact Form Error:', err.message);
+    return {
+      statusCode: 500,
+      headers: CORS_HEADERS,
+      body: JSON.stringify({ error: 'Server error. Please try WhatsApp instead.' })
+    };
+  }
 };
