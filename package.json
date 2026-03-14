@@ -1,13 +1,32 @@
 {
-  "devDependencies": {
-    "@wix/cli": "^1.0.0",
-    "@wix/eslint-plugin-cli": "^1.0.0",
-    "eslint": "^8.25.0",
-    "react": "16.14.0"
-  },
+  "name": "narayani-waterpark",
+  "version": "1.0.0",
+  "description": "This repo is part of Git Integration & Wix CLI, a set of tools that allows you to write, test, and publish code for your Wix site locally on your computer.",
+  "main": "index.js",
   "scripts": {
-    "postinstall": "wix sync-types",
-    "dev": "wix dev",
-    "lint": "eslint ."
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnakeEye-sudo/Narayani-Waterpark.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SnakeEye-sudo/Narayani-Waterpark/issues"
+  },
+  "homepage": "https://github.com/SnakeEye-sudo/Narayani-Waterpark#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "js-sha512": "^0.9.0",
+    "nodemailer": "^8.0.2",
+    "@supabase/supabase-client": "^2.49.1"
   }
 }

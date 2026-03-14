@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Narayani Waterpark Bettiah - Bihar's #1 water park! Thrilling rides, family fun. Book Now!">
+  <title>Narayani Waterpark Bettiah | Bihar's #1 Water Park</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="public_assets/Logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <!-- EmailJS for contact form (sends silently to krishna.sangam11@gmail.com) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function(){ if(typeof emailjs!=='undefined') emailjs.init({ publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' }); })();
+  </script>
+</head>
+<body>
+<div id="ripple-container"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div style="text-align:center">
+    <!-- Logo white bg box so it's visible against dark backdrop -->
+    <div style="background:white;border-radius:20px;padding:16px 24px;display:inline-block;box-shadow:0 8px 40px rgba(0,0,0,0.4)">
+      <img src="public_assets/Logo.png" alt="Narayani Waterpark" width="180"
+           style="display:block"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;font-size:1.8rem;font-weight:900;color:#0a4fa0">💧 Narayani Waterpark</div>
+    </div>
+    <div class="water-drops" style="justify-content:center;margin-top:24px">
+      <div class="drop"></div><div class="drop"></div><div class="drop"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <!-- APRIL 2ND TOP BANNER (auto-hides after April 2) -->
+  <div class="april2-promo" id="april2TopBanner" style="background:linear-gradient(90deg,#ff6b35,#f7c52a);text-align:center;padding:10px 20px;font-weight:700;font-size:0.95rem;color:#fff;width:100%">
+    <span data-key="april2Banner">⭐ Special Event — April 2, 2026 | Meet Mahi & Manisha at Narayani Waterpark!</span>
+    &nbsp;&nbsp;
+    <a href="#" onclick="openBooking();return false;" style="background:#fff;color:#ff6b35;padding:4px 14px;border-radius:50px;font-size:0.85rem;text-decoration:none;font-weight:700">Book Now →</a>
+  </div>
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html">
+      <!-- White box ensures logo visible on any hero background -->
+      <div style="background:white;border-radius:12px;padding:4px 10px;box-shadow:0 2px 12px rgba(0,0,0,0.2);display:inline-flex;align-items:center">
+        <img src="public_assets/Logo.png" alt="Narayani Waterpark" style="height:52px;width:auto;display:block"
+             onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-size:1.1rem;font-weight:900;color:#0a4fa0\'>💧 Narayani Waterpark</span>'">
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" class="active" data-key="navHome">Home</a></li>
+      <li><a href="#about" data-key="navAbout">About</a></li>
+      <li><a href="#rides" data-key="navRides">Rides</a></li>
+      <li><a href="#gallery" data-key="navGallery">Gallery</a></li>
+      <li><a href="#pricing" data-key="navPricing">Pricing</a></li>
+      <li><a href="#contact" data-key="navContact">Contact</a></li>
+      <li><a href="#" class="nav-book-btn" onclick="openBooking();return false;" data-key="navBook">🎟 Book Now</a></li>
+    </ul>
+    <button id="langToggle" onclick="toggleLanguage()">हिंदी</button>
+    <div id="menuToggle" onclick="toggleMenu()">
+      <span id="bar1"></span><span id="bar2"></span><span id="bar3"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="hero">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide active" style="background-image:url('public_assets/WhatsApp Image 2026-03-14 at 08.01.58.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('public_assets/WhatsApp Image 2026-03-14 at 08.01.59.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('public_assets/WhatsApp Image 2026-03-14 at 08.02.00.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('public_assets/WhatsApp Image 2026-03-14 at 08.01.57.jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('public_assets/WhatsApp Image 2026-03-14 at 08.01.57 (2).jpeg')"></div>
+    <div class="hero-slide" style="background-image:url('public_assets/Narayani Waterpark (1).jpg')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-key="heroBadge">🎉 Grand Reopening — March 15, 2026</div>
+    <h1 class="hero-title">
+      <span data-key="heroTitle">Bihar's Most Amazing Water Park!</span><br>
+      <span data-key="heroTitleSpan" style="color:var(--accent)">Bettiah!</span>
+    </h1>
+    <p class="hero-sub" data-key="heroSub">Thrilling rides, family fun, and memories for a lifetime — only at Narayani Waterpark, Bettiah!</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openBooking()"><span data-key="heroBtn1">🎟 Book Now — ₹400 Onwards</span></button>
+      <a class="btn-secondary" href="#gallery"><span data-key="heroBtn2">📸 View Gallery</span></a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label" data-key="stat1">Thrilling Rides</div></div>
+    <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label" data-key="stat2">Happy Families Daily</div></div>
+    <div class="stat-item"><div class="stat-num">10AM</div><div class="stat-label" data-key="stat3">Opens Daily</div></div>
+    <div class="stat-item"><div class="stat-num">6PM</div><div class="stat-label" data-key="stat4">Closes Daily</div></div>
+  </div>
+  <div class="hero-dots" id="heroDots">
+    <div class="hero-dot active" onclick="goToSlide(0)"></div>
+    <div class="hero-dot" onclick="goToSlide(1)"></div>
+    <div class="hero-dot" onclick="goToSlide(2)"></div>
+    <div class="hero-dot" onclick="goToSlide(3)"></div>
+    <div class="hero-dot" onclick="goToSlide(4)"></div>
+    <div class="hero-dot" onclick="goToSlide(5)"></div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <div class="scroll-arrow">⌄</div>
+  </div>
+  <div class="wave-divider" style="bottom: 0; transform: scaleY(-1);">
+    <svg viewBox="0 24 150 28" preserveAspectRatio="none">
+      <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
+      <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+        <use href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+        <use href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+        <use href="#gentle-wave" x="48" y="7" fill="#fff" />
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- COUNTDOWN MODAL -->
+<div id="countdownModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;backdrop-filter:blur(8px)">
+  <div style="background:linear-gradient(135deg,#0a4fa0,#083e7e);padding:40px;border-radius:24px;text-align:center;position:relative;max-width:90%;width:500px;box-shadow:0 30px 60px rgba(0,0,0,0.6);border:2px solid rgba(255,255,255,0.1)">
+    <button onclick="closeCountdown()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center">&times;</button>
+    <div style="font-size:3rem;margin-bottom:12px">🎉</div>
+    <h2 class="countdown-text" style="color:white;font-size:1.6rem;margin-bottom:24px" data-key="countdownText">Grand Reopening — March 15, 2026</h2>
+    <div class="countdown-timer" style="display:flex;gap:12px;justify-content:center;background:rgba(0,0,0,0.2);padding:24px;border-radius:16px">
+      <div class="time-block" style="flex:1"><div class="num" id="days" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Days</div></div>
+      <div class="time-block" style="flex:1"><div class="num" id="hours" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Hours</div></div>
+      <div class="time-block" style="flex:1"><div class="num" id="minutes" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Mins</div></div>
+      <div class="time-block" style="flex:1"><div class="num" id="seconds" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Secs</div></div>
+    </div>
+    <button class="btn-primary" onclick="closeCountdown();openBooking()" style="margin-top:32px;width:100%;font-size:1.1rem;padding:16px">🎟 Pre-book Now</button>
+  </div>
+</div>
+
+<script>
+function closeCountdown() {
+  document.getElementById('countdownModal').style.display = 'none';
+  sessionStorage.setItem('countdownClosed', 'true');
+}
+</script>
+
+<!-- APRIL 2ND EVENT SECTION (auto-hides after April 2) -->
+<section class="april2-promo" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:80px 0;">
+  <div class="container" style="text-align:center">
+    <div class="section-tag" style="color:#f7c52a">🌟 Special Event</div>
+    <h2 class="section-title" style="color:white;margin-bottom:12px">
+      2 April 2026 — <span style="color:#f7c52a">Narayani Waterpark Mein Ek Khaas Din!</span>
+    </h2>
+    <p style="color:rgba(255,255,255,0.85);max-width:640px;margin:0 auto 28px;font-size:1.05rem;line-height:1.8">
+      Bihar ke popular <strong style="color:#f7c52a">Instagram influencers Mahi &amp; Manisha</strong> aayenge Narayani Waterpark!
+      Dono apni amazing dance performances se aapka din yaadgaar bana denge — sirf park ki timings mein (10AM–6PM).
+      Unhe live dekhne ka aur unke saath photos lene ka ek adbhut mauka!
+    </p>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:36px">
+      <img src="public_assets/2nd April, 2026 (1).jpeg" alt="April 2 Event" style="width:240px;height:160px;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+      <img src="public_assets/2nd April, 2026 (2).jpeg" alt="April 2 Event" style="width:240px;height:160px;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+      <img src="public_assets/2nd April, 2026 (3).jpeg" alt="April 2 Event" style="width:240px;height:160px;object-fit:cover;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.5)">
+    </div>
+    <div style="background:rgba(247,197,42,0.15);border:2px solid rgba(247,197,42,0.4);border-radius:16px;padding:16px 24px;display:inline-block;margin-bottom:28px;color:rgba(255,255,255,0.9);font-size:0.95rem">
+      🎟 Entry ticket: Weekday ₹400 &nbsp;|&nbsp; Weekend ₹500 &nbsp;&nbsp;|&nbsp;&nbsp; ⏰ 10:00 AM – 6:00 PM
+    </div>
+    <br>
+    <button class="btn-primary" onclick="openBooking()" style="font-size:1.1rem;padding:18px 48px">
+      🎟 Book Your Tickets Now
+    </button>
+  </div>
+  <div class="wave-divider" style="bottom: 0;">
+    <svg viewBox="0 24 150 28" preserveAspectRatio="none">
+      <g class="parallax">
+        <use href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.1)" />
+        <use href="#gentle-wave" x="48" y="7" fill="var(--light)" />
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images reveal">
+        <div class="about-badge-float">
+          <div class="num">🏆</div>
+          <div class="txt">Bihar's #1</div>
+        </div>
+        <div class="about-img-main">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57.jpeg" alt="Narayani Waterpark">
+        </div>
+        <div class="about-img-float">
+          <source src="public_assets/Narayani%20Waterpark%20(1).mp4" type="video/mp4">r Park Fun">
+        </div>
+      </div>
+      <div class="about-content reveal" style="transition-delay:0.2s">
+        <div class="section-tag" data-key="aboutTag">About Us</div>
+        <h2 class="section-title">
+          <span data-key="aboutTitle">A World of Joy</span><br>
+          <span data-key="aboutTitleSpan">Awaits You</span>
+        </h2>
+        <p style="color:var(--text-light);margin-bottom:16px;line-height:1.8" data-key="aboutP1">
+          Narayani Waterpark is Bettiah's first and largest water park. Enjoy thrilling rides, cool pools, and unlimited family entertainment!
+        </p>
+        <p style="color:var(--text-light);margin-bottom:28px;line-height:1.8">
+          📍 <strong data-key="aboutAddr">Opp. R.L. International School, Pipra Road, Bettiah, Bihar</strong><br>
+          ⏰ <strong data-key="aboutTime">Open Daily: 10:00 AM – 6:00 PM</strong><br>
+          📞 <strong><a href="tel:+918434057242" style="color:var(--primary)" data-key="aboutPhone">+91 8434057242</a></strong>
+        </p>
+        <div class="features-grid">
+          <div class="feature-item"><div class="feature-icon">💦</div><span data-key="f1">15+ Water Rides</span></div>
+          <div class="feature-item"><div class="feature-icon">🅿</div><span data-key="f2">Free Parking</span></div>
+          <div class="feature-item"><div class="feature-icon">🍔</div><span data-key="f3">Food Court</span></div>
+          <div class="feature-item"><div class="feature-icon">👶</div><span data-key="f4">Kids Zone</span></div>
+          <div class="feature-item"><div class="feature-icon">🔒</div><span data-key="f5">Safe &amp; Secure</span></div>
+          <div class="feature-item"><div class="feature-icon">🚿</div><span data-key="f6">Change Rooms</span></div>
+          <div class="feature-item"><div class="feature-icon">💊</div><span data-key="f7">First Aid</span></div>
+          <div class="feature-item"><div class="feature-icon">📸</div><span data-key="f8">Photo Spots</span></div>
+        </div>
+        <button class="btn-primary" style="margin-top:32px" onclick="openBooking()" data-key="aboutBtn">🎟 Book Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RIDES -->
+<section id="rides">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-tag" data-key="ridesTag">Our Attractions</div>
+      <h2 class="section-title"><span data-key="ridesTitle">Thrilling</span> <span data-key="ridesTitleSpan">Rides &amp; Attractions</span></h2>
+      <p class="section-sub" data-key="ridesSub">Something for every family member — from kids to adults!</p>
+    </div>
+    <div class="rides-grid">
+      <div class="ride-card reveal">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.02.00.jpeg" alt="Wave Pool">
+          <div class="ride-badge">🔥 Most Popular</div>
+        </div>
+        <div class="ride-info">
+          <h3>🌊 Wave Pool</h3>
+          <p>Real ocean jaisi waves mein enjoy karo! Family ke saath perfect fun.</p>
+          <div class="ride-tags"><span class="ride-tag">All Ages</span><span class="ride-tag">Family</span></div>
+        </div>
+      </div>
+      <div class="ride-card reveal" style="transition-delay:0.1s">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.59.jpeg" alt="Water Slides">
+          <div class="ride-badge">🎢 Thrill</div>
+        </div>
+        <div class="ride-info">
+          <h3>🎢 Giant Water Slides</h3>
+          <p>Height se neeche aao aur paani mein splash karo — adrenaline rush!</p>
+          <div class="ride-tags"><span class="ride-tag">Adults</span><span class="ride-tag">Teens</span></div>
+        </div>
+      </div>
+      <div class="ride-card reveal" style="transition-delay:0.2s">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.58.jpeg" alt="Kids Zone">
+          <div class="ride-badge">👶 Kids</div>
+        </div>
+        <div class="ride-info">
+          <h3>🏖 Kids Splash Zone</h3>
+          <p>Chote bachon ke liye safe play area with mini slides aur sprinklers.</p>
+          <div class="ride-tags"><span class="ride-tag">Children</span><span class="ride-tag">Safe</span></div>
+        </div>
+      </div>
+      <div class="ride-card reveal" style="transition-delay:0.3s">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57 (2).jpeg" alt="Rain Dance">
+          <div class="ride-badge">💃 Fun</div>
+        </div>
+        <div class="ride-info">
+          <h3>🌧 Rain Dance</h3>
+          <p>Music ke beat par nacho aur barish mein bhigo! Best group activity.</p>
+          <div class="ride-tags"><span class="ride-tag">Groups</span><span class="ride-tag">Youth</span></div>
+        </div>
+      </div>
+      <div class="ride-card reveal" style="transition-delay:0.1s">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57 (1).jpeg" alt="Lazy River">
+        </div>
+        <div class="ride-info">
+          <h3>🛶 Lazy River</h3>
+          <p>Tube mein baith ke slow current ke saath float karo — pure relaxation!</p>
+          <div class="ride-tags"><span class="ride-tag">All Ages</span><span class="ride-tag">Relaxing</span></div>
+        </div>
+      </div>
+      <div class="ride-card reveal" style="transition-delay:0.2s">
+        <div class="ride-img">
+          <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.56.jpeg" alt="Family Pool">
+        </div>
+        <div class="ride-info">
+          <h3>👨‍👩‍👧‍👦 Family Pool</h3>
+          <p>Bade swimming pool mein puri family ke saath swim karo.</p>
+          <div class="ride-tags"><span class="ride-tag">Family</span><span class="ride-tag">Swimming</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY WITH SLIDER (Issue #4)
+     All photos + all videos play in one slider with thumbnails
+     ============================================================ -->
+<section id="gallery" style="background:var(--primary-dark);padding:80px 0;">
+  <div class="container">
+    <div class="section-header center reveal" style="margin-bottom:40px">
+      <div class="section-tag" style="color:var(--accent-light)" data-key="galleryTag">Gallery</div>
+      <h2 class="section-title" style="color:#f7c52a; text-shadow:0 0 15px rgba(247,197,42,0.4)">
+        <span data-key="galleryTitle">Glimpse of</span> <span data-key="galleryTitleSpan">the Park</span>
+      </h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.75)" data-key="gallerySub">Come make memories like these!</p>
+    </div>
+
+    <!-- Main display -->
+    <div style="position:relative;border-radius:20px;overflow:hidden;background:#000;max-width:900px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,0.5)">
+      <div id="gsDisplay" style="width:100%;height:480px;display:flex;align-items:center;justify-content:center">
+        <img src="public_assets/WhatsApp Image 2026-03-14 at 08.01.58.jpeg" alt="Gallery" style="width:100%;height:480px;object-fit:cover">
+      </div>
+      <!-- Prev / Next -->
+      <button onclick="galleryPrev()" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">‹</button>
+      <button onclick="galleryNext()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">›</button>
+      <!-- Counter -->
+      <div id="gsCounter" style="position:absolute;bottom:12px;right:16px;background:rgba(0,0,0,0.55);color:white;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:600"></div>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div id="gsThumbs" style="display:flex;gap:10px;overflow-x:auto;padding:16px 0;max-width:900px;margin:0 auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.3) transparent">
+    </div>
+
+    <!-- Hidden slide data (photos + videos) -->
+    <div style="display:none">
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.58.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.59.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.02.00.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57 (1).jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.57 (2).jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2026-03-14 at 08.01.56.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/Narayani Waterpark (1).jpg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2025-04-09 at 18.54.56_2f5455d7.jpg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/WhatsApp Image 2025-04-09 at 18.54.57_001ccf1a.jpg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/15th March, 2026.jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/2nd April, 2026 (1).jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/2nd April, 2026 (2).jpeg"></div>
+      <div class="gs-slide" data-type="image" data-src="public_assets/2nd April, 2026 (3).jpeg"></div>
+      <!-- All videos -->
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(1).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(2).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(3).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(4).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(5).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/Narayani%20Waterpark%20(6).mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/WhatsApp Video 2026-03-14 at 08.02.04.mp4"></div>
+      <div class="gs-slide" data-type="video" data-src="public_assets/WhatsApp Video 2025-05-07 at 23.58.45_a98b591c.mp4"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://wa.me/918434057242" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <span data-key="galleryBtn">📱 Join Us at the Park!</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:white">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-tag" data-key="pricingTag">Tickets</div>
+      <h2 class="section-title"><span data-key="pricingTitle">Entry</span> <span data-key="pricingTitleSpan">Pricing Plans</span></h2>
+      <p class="section-sub" data-key="pricingSub">Affordable prices, unlimited fun — that's the Narayani Waterpark magic!</p>
+    </div>
+    <div class="pricing-grid" style="max-width:860px;margin:0 auto">
+      <!-- Weekday Card -->
+      <div class="price-card reveal">
+        <div class="price-icon">📅</div>
+        <div class="price-name" data-key="priceWeekday">Weekday</div>
+        <div style="margin:16px 0">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">400</span>
+        </div>
+        <div class="price-period">Per Person (Mon – Fri)</div>
+        <ul class="price-features" style="margin-top:20px">
+          <li>All Water Rides</li>
+          <li>Wave Pool Access</li>
+          <li>Kids Zone</li>
+          <li>Rain Dance</li>
+          <li>Lazy River</li>
+        </ul>
+        <button class="btn-book outline" onclick="openBooking()">Book Weekday</button>
+      </div>
+      <!-- Weekend Card (Featured) -->
+      <div class="price-card featured reveal" style="transition-delay:0.1s">
+        <div class="popular-badge" data-key="mostPop">Best Value</div>
+        <div class="price-icon">🎉</div>
+        <div class="price-name" data-key="priceWeekend">Weekend</div>
+        <div style="margin:16px 0">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">500</span>
+        </div>
+        <div class="price-period" style="color:rgba(255,255,255,0.8)">Per Person (Sat &amp; Sun)</div>
+        <ul class="price-features" style="margin-top:20px">
+          <li>All Water Rides</li>
+          <li>Wave Pool Access</li>
+          <li>Kids Zone</li>
+          <li>Rain Dance</li>
+          <li>Lazy River + More Fun</li>
+        </ul>
+        <button class="btn-book" onclick="openBooking()">Book Weekend</button>
+      </div>
+      <!-- Special Events Card -->
+      <div class="price-card april2-promo reveal" style="transition-delay:0.2s;border-color:#f7c52a">
+        <div class="price-icon">⭐</div>
+        <div class="price-name">Special Event</div>
+        <div style="margin:16px 0">
+          <span class="price-currency">₹</span>
+          <span class="price-amount" style="color:var(--accent)">500</span>
+        </div>
+        <div class="price-period">April 2nd — Mahi &amp; Manisha</div>
+        <ul class="price-features" style="margin-top:20px">
+          <li>All Park Access</li>
+          <li>Mahi &amp; Manisha Live</li>
+          <li>Dance Performance</li>
+          <li>Photo Opportunity</li>
+          <li>Special Day Experience</li>
+        </ul>
+        <button class="btn-book outline" onclick="openBooking()">Book April 2nd</button>
+      </div>
+    </div>
+
+    <p id="pricingNote" style="text-align:center;margin-top:36px;font-size:0.95rem;font-weight:600">
+      🌟 Weekdays (Mon–Fri): ₹400 per person &nbsp;|&nbsp; Weekends &amp; Public Holidays (Sat/Sun): ₹500 per person
+    </p>
+    <!-- Note for group bookings -->
+    <p style="text-align:center;margin-top:10px;color:var(--text-light);font-size:0.85rem">
+      👥 Group bookings &amp; corporate events — call <a href="tel:+918434057242" style="color:var(--primary);font-weight:700">+91 8434057242</a>
+    </p>
+  </div>
+</section>
+
+<!-- 15 MARCH REOPENING -->
+<section style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);padding:60px 0">
+  <div class="container" style="text-align:center">
+    <div class="section-tag">🎉 Grand Reopening</div>
+    <h2 class="section-title">15 March 2026 — <span>We're Back!</span></h2>
+    <p style="color:var(--text-light);max-width:600px;margin:0 auto 28px;font-size:1rem;line-height:1.8">
+      Narayani Waterpark grand reopening ke saath wapas aaya hai 15 March se! Apni family ke saath aao aur puri summer ka maza lo!
+    </p>
+    <img src="public_assets/15th March, 2026.jpeg" alt="Grand Reopening" style="max-width:480px;width:100%;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.15);margin-bottom:28px">
+    <br>
+    <button class="btn-primary" onclick="openBooking()">🎟 Book Your Tickets</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-tag" data-key="contactTag">Contact Us</div>
+      <h2 class="section-title"><span data-key="contactTitle">Get In</span> <span data-key="contactTitleSpan">Touch With Us</span></h2>
+      <p class="section-sub" data-key="contactSub">Have questions? We're here for you!</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Park Information</h3>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-text">
+            <strong>Address</strong>
+            <span>Opp. R.L. International School, Pipra Road, Bettiah, West Champaran, Bihar - 845438</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div class="info-text">
+            <strong>Phone</strong>
+            <span><a href="tel:+918434057242" style="color:var(--primary)">+91 8434057242</a></span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">⏰</div>
+          <div class="info-text">
+            <strong>Timings</strong>
+            <span>Monday – Sunday: 10:00 AM – 6:00 PM</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🌐</div>
+          <div class="info-text">
+            <strong>Website</strong>
+            <span>www.narayaniwaterpark.com</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank" title="WhatsApp">💬</a>
+          <a href="#" class="social-btn instagram" target="_blank" title="Instagram">📸</a>
+          <a href="#" class="social-btn facebook" target="_blank" title="Facebook">👍</a>
+        </div>
+        <iframe
+          src="https://maps.google.com/maps?q=Narayani%20Waterpark,%20Bihar&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="200" style="border:0;border-radius:12px;margin-top:24px" allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+      <div class="contact-form reveal" style="transition-delay:0.2s">
+        <h3 style="margin-bottom:24px;font-size:1.4rem;font-weight:700" data-key="formTitle">Send a Message</h3>
+        <!-- Form submits silently to krishna.sangam11@gmail.com via EmailJS -->
+        <form onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-key="nameLabel">Your Name *</label>
+              <input type="text" id="cName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label data-key="phoneLabel">Mobile Number *</label>
+              <input type="tel" id="cPhone" placeholder="+91 XXXXXXXXXX" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-key="emailLabel">Email (Optional)</label>
+            <input type="email" id="cEmail" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label data-key="subjectLabel">Subject *</label>
+            <select id="cSubject">
+              <option>Booking Inquiry</option>
+              <option>Group Booking</option>
+              <option>Birthday Party Package</option>
+              <option>Corporate Event</option>
+              <option>April 2nd Special Event</option>
+              <option>General Query</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-key="msgLabel">Your Message *</label>
+            <textarea id="cMsg" placeholder="Ask anything..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+            <span data-key="formBtn">📨 Send Message</span>
+          </button>
+          <a href="https://wa.me/918434057242" target="_blank"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;padding:14px;background:#25D366;color:white;border-radius:50px;font-weight:700;text-decoration:none;transition:all 0.3s">
+            <span data-key="waBtn">💬 Chat on WhatsApp</span>
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <!-- Logo in footer on white bg box -->
+        <div style="background:white;border-radius:12px;padding:8px 16px;display:inline-block;margin-bottom:16px">
+          <img src="public_assets/Logo.png" alt="Narayani Waterpark" style="height:60px;width:auto"
+               onerror="this.style.display='none'">
+        </div>
+        <p data-key="footerAbout">Bihar's first and largest water park — Narayani Waterpark, Bettiah. Come with your family and take home endless joy!</p>
+        <div class="social-links" style="margin-top:20px">
+          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank">💬</a>
+          <a href="#" class="social-btn instagram" target="_blank">📸</a>
+          <a href="#" class="social-btn facebook" target="_blank">👍</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footerLinks">Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#rides">Rides</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footerInfo">Information</h4>
+        <ul>
+          <li><a href="#">Park Rules</a></li>
+          <li><a href="#">Safety Guidelines</a></li>
+          <li><a href="#">Group Booking</a></li>
+          <li><a href="#">Birthday Packages</a></li>
+          <li><a href="#">Corporate Events</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footerContact">Contact</h4>
+        <div class="footer-contact-item"><span>📍</span><span>Opp. R.L. International School, Pipra, Bettiah, Bihar</span></div>
+        <div class="footer-contact-item"><span>📞</span><span>+91 8434057242</span></div>
+        <div class="footer-contact-item"><span>⏰</span><span>10:00 AM – 6:00 PM (Daily)</span></div>
+        <div class="footer-contact-item"><span>🌐</span><span>www.narayaniwaterpark.com</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-key="footerCopy">© 2026 Narayani Waterpark, Bettiah. All Rights Reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/918434057242?text=Hello! Narayani Waterpark mein booking karni hai." target="_blank" class="float-wa" title="WhatsApp Us">💬</a>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="" style="max-width:90%;max-height:90vh;border-radius:12px">
+  <span style="position:absolute;top:20px;right:30px;color:white;font-size:2.5rem;cursor:pointer" onclick="closeLightbox()">✕</span>
+</div>
+
+<!-- BOOKING MODAL -->
+<div id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBooking()">✕</button>
+    <div class="modal-title" data-key="modalTitle">🎟 Book Your Tickets</div>
+    <p class="modal-sub" data-key="modalSub">Narayani Waterpark — Open Daily 10AM–6PM</p>
+
+    <!-- April 2nd banner inside modal (hidden by default) -->
+    <div id="april2BookingInfo" style="display:none;background:linear-gradient(135deg,#0f3460,#1a6fd4);color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:12px;font-size:0.88rem;font-weight:600;text-align:center">
+      ⭐ You selected April 2nd — Mahi &amp; Manisha live performances at the park! Same price applies.
+    </div>
+
+    <!-- Date selection -->
+    <div style="margin-bottom:14px">
+      <label style="display:block;font-weight:700;margin-bottom:6px;font-size:0.9rem;color:var(--primary)" data-key="dateLabel">Select Visit Date *</label>
+      <input type="date" id="bookingDate" onchange="updateTotal()" style="width:100%;padding:12px 16px;border:2px solid var(--primary);border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;background:#f8f9ff;color:#333;font-weight:600;box-sizing:border-box">
+    </div>
+
+    <!-- Pricing indicator -->
+    <div id="priceIndicator" style="background:var(--light);border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:0.88rem;font-weight:700;color:var(--primary);text-align:center">
+      📅 Select a date to see pricing
+    </div>
+
+    <!-- Ticket counters -->
+    <div class="ticket-counter">
+      <div class="ticket-info">
+        <div class="ticket-name" data-key="adultTicket">👨 Adult (12+ Years)</div>
+        <div class="ticket-price" id="adultPriceDisplay">Select date to see price</div>
+      </div>
+      <div class="counter">
+        <button class="counter-btn" onclick="changeCount('adult',-1)">−</button>
+        <span class="counter-val" id="adultCount">0</span>
+        <button class="counter-btn" onclick="changeCount('adult',1)">+</button>
+      </div>
+    </div>
+    <div class="ticket-counter">
+      <div class="ticket-info">
+        <div class="ticket-name" data-key="childTicket">👧 Child (Under 12)</div>
+        <div class="ticket-price" id="childPriceDisplay">Select date to see price</div>
+      </div>
+      <div class="counter">
+        <button class="counter-btn" onclick="changeCount('child',-1)">−</button>
+        <span class="counter-val" id="childCount">0</span>
+        <button class="counter-btn" onclick="changeCount('child',1)">+</button>
+      </div>
+    </div>
+    <div class="ticket-counter">
+      <div class="ticket-info">
+        <div class="ticket-name" data-key="seniorTicket">🧓 Senior (60+ Years)</div>
+        <div class="ticket-price" id="seniorPriceDisplay">Select date to see price</div>
+      </div>
+      <div class="counter">
+        <button class="counter-btn" onclick="changeCount('senior',-1)">−</button>
+        <span class="counter-val" id="seniorCount">0</span>
+        <button class="counter-btn" onclick="changeCount('senior',1)">+</button>
+      </div>
+    </div>
+
+    <div class="total-row">
+      <span class="total-label" data-key="totalLabel">💰 Total Amount:</span>
+      <span class="total-amount" id="totalAmount">₹0</span>
+    </div>
+
+    <!-- PayU form (server-side hash needed before going live) -->
+    <form id="payuForm" method="POST" action="https://test.payu.in/_payment">
+      <input type="hidden" name="key" id="payuKey" value="6GvYsh">
+      <input type="hidden" name="txnid" id="txnid" value="">
+      <input type="hidden" name="amount" id="payuAmount" value="0">
+      <input type="hidden" name="productinfo" id="productinfo" value="Narayani Waterpark Tickets">
+      <input type="hidden" name="firstname" id="payuName" value="">
+      <input type="hidden" name="email" id="payuEmail" value="">
+      <input type="hidden" name="phone" id="payuPhone" value="">
+      <input type="hidden" name="surl" value="https://www.narayaniwaterpark.com/success">
+      <input type="hidden" name="furl" value="https://www.narayaniwaterpark.com/failure">
+      <input type="hidden" name="hash" id="payuHash" value="">
+    </form>
+
+    <!-- Name & Phone -->
+    <div style="margin-top:8px">
+      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="nameModalLabel">Your Name *</label>
+      <input type="text" id="bookingName" placeholder="Enter your name"
+        style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;margin-bottom:10px;box-sizing:border-box">
+      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="phoneModalLabel">Mobile Number *</label>
+      <input type="tel" id="bookingPhone" placeholder="+91 XXXXXXXXXX" value="+91 "
+        style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;margin-bottom:10px;box-sizing:border-box">
+
+      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem">Email Address *</label>
+      <input type="email" id="bookingEmail" placeholder="your@email.com"
+        style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;box-sizing:border-box">
+    </div>
+
+    <button class="pay-btn" style="margin-top:20px" onclick="proceedToPay()">
+      <span data-key="payBtn">💳 Pay Securely via PayU</span>
+    </button>
+    <div class="or-divider" data-key="orDiv">— or —</div>
+    <button class="wa-btn" onclick="bookViaWhatsApp()">
+      <span data-key="waBookBtn">💬 Book via WhatsApp</span>
+    </button>
+    <p style="text-align:center;font-size:0.75rem;color:var(--text-light);margin-top:12px" data-key="secure">
+      🔒 100% Secure | Instant Confirmation
+    </p>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
