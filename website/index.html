@@ -658,9 +658,10 @@ function closeCountdown() {
     </div>
 
     <!-- Ticket counters -->
+    <!-- Simplified: Single Persons Counter -->
     <div class="ticket-counter">
       <div class="ticket-info">
-        <div class="ticket-name" data-key="adultTicket">👨 Adult (12+ Years)</div>
+        <div class="ticket-name" data-key="adultTicket">👥 Number of Persons</div>
         <div class="ticket-price" id="adultPriceDisplay">Select date to see price</div>
       </div>
       <div class="counter">
@@ -669,27 +670,9 @@ function closeCountdown() {
         <button class="counter-btn" onclick="changeCount('adult',1)">+</button>
       </div>
     </div>
-    <div class="ticket-counter">
-      <div class="ticket-info">
-        <div class="ticket-name" data-key="childTicket">👧 Child (Under 12)</div>
-        <div class="ticket-price" id="childPriceDisplay">Select date to see price</div>
-      </div>
-      <div class="counter">
-        <button class="counter-btn" onclick="changeCount('child',-1)">−</button>
-        <span class="counter-val" id="childCount">0</span>
-        <button class="counter-btn" onclick="changeCount('child',1)">+</button>
-      </div>
-    </div>
-    <div class="ticket-counter">
-      <div class="ticket-info">
-        <div class="ticket-name" data-key="seniorTicket">🧓 Senior (60+ Years)</div>
-        <div class="ticket-price" id="seniorPriceDisplay">Select date to see price</div>
-      </div>
-      <div class="counter">
-        <button class="counter-btn" onclick="changeCount('senior',-1)">−</button>
-        <span class="counter-val" id="seniorCount">0</span>
-        <button class="counter-btn" onclick="changeCount('senior',1)">+</button>
-      </div>
+
+    <div id="priceIndicator" style="padding:12px;background:#f0f7ff;border-radius:8px;margin:10px 0;text-align:center;font-size:0.9rem;font-weight:600;color:#555;">
+      📅 Select a date to see pricing
     </div>
 
     <div class="total-row">
