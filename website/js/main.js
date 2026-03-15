@@ -539,6 +539,9 @@ function updateTotal() {
   var pa = document.getElementById('payuAmount');
   if (ta) ta.textContent = '₹' + total;
 
+  }
+
+function openBooking(type) {
   ticketCounts = { adult: 0, child: 0, senior: 0 };
   if (type === 'adult') ticketCounts.adult = 1;
   if (type === 'child') ticketCounts.child = 1;
