@@ -6,6 +6,18 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+[[redirects]]
+  from = "http://narayaniwaterpark.com/*"
+  to = "https://narayaniwaterpark.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.narayaniwaterpark.com/*"
+  to = "https://narayaniwaterpark.com/:splat"
+  status = 301
+  force = true
+
 
 [functions]
   node_bundler = "esbuild"
