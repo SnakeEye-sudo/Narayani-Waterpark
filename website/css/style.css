@@ -835,4 +835,8 @@ body.dark-mode .legal-box p, body.dark-mode .legal-box li { color: #ccc; }
 .reopening-section.reveal, .reopening-section .reveal { opacity:1!important; visibility:visible!important; transform:none!important; }
 .reopening-section img { opacity:1!important; visibility:visible!important; }
 .insta-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin-top:28px; }
+
+.reopening-section, .reopening-section h2, .reopening-section p, .reopening-section img { opacity:1!important; visibility:visible!important; transform:none!important; }
+.reopening-section { background: var(--white); }
+.reopening-section img { max-width:100%; height:auto; display:block; margin:0 auto; }
 .insta-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin-top:28px; }
