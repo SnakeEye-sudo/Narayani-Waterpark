@@ -48,7 +48,7 @@ var translations = {
     formBtn: '📨 Send Message', waBtn: '💬 Chat on WhatsApp',
     modalTitle: '🎟 Book Your Tickets',
     modalSub: 'Narayani Waterpark — Open Daily 10AM–6PM',
-    adultTicket: '👨 Adult (12+ Years)',
+    adultTicket: '👥 Person (12+ Years)',
     childTicket: '👧 Child (Under 12)',
     seniorTicket: '🧓 Senior (60+ Years)',
     dateLabel: 'Select Visit Date *',
@@ -107,7 +107,7 @@ var translations = {
     formBtn: '📨 संदेश भेजें', waBtn: '💬 व्हाट्सऐप पर बात करें',
     modalTitle: '🎟 टिकट बुक करें',
     modalSub: 'नारायणी वाटर पार्क — रोज खुला सुबह 10 – शाम 6',
-    adultTicket: '👨 वयस्क (12+ वर्ष)',
+    adultTicket: '👥 व्यक्ति (12+ वर्ष)',
     childTicket: '👧 बच्चा (12 साल से कम)',
     seniorTicket: '🧓 बुजुर्ग (60+ वर्ष)',
     dateLabel: 'यात्रा की तारीख चुनें *',
@@ -507,7 +507,7 @@ function updateTotal() {
 
   var adEl = document.getElementById('adultPriceDisplay');
 
-  if (adEl) adEl.textContent = '₹' + price + ' per ticket';
+  if (adEl) adEl.textContent = '₹' + price + ' per ticket';     var ac = document.getElementById('adultCount');     if (ac) ac.textContent = ticketCounts.adult;
 
   // Price indicator colour
   var ind = document.getElementById('priceIndicator');
@@ -644,7 +644,7 @@ function proceedToPay() {
 
   var txnId = 'NWP' + Date.now();
   var ticketDesc = [];
-  if (ticketCounts.adult  > 0) ticketDesc.push('Adult x' + ticketCounts.adult);
+  if (ticketCounts.adult  > 0) ticketDesc.push('Person x' + ticketCounts.adult);
   if (ticketCounts.child  > 0) ticketDesc.push('Child x' + ticketCounts.child);
   if (ticketCounts.senior > 0) ticketDesc.push('Senior x' + ticketCounts.senior);
   var productInfo = 'NWP ' + ticketDesc.join(',') + ' Date:' + dateStr;
@@ -725,7 +725,7 @@ function bookViaWhatsApp() {
     + '📅 Visit Date: ' + dateStr + ' (' + dayName + ' — ' + (isWeekend ? 'Weekend' : 'Weekday') + ')\n'
     + '💰 Ticket Rate: ₹' + price + ' per person\n'
     + '🎫 Tickets:\n'
-    + (ticketCounts.adult  > 0 ? '  • Adult x'  + ticketCounts.adult  + ' = ₹' + (ticketCounts.adult  * price) + '\n' : '')
+    + (ticketCounts.adult  > 0 ? '  • Person x'  + ticketCounts.adult  + ' = ₹' + (ticketCounts.adult  * price) + '\n' : '')
     + (ticketCounts.child  > 0 ? '  • Child x'  + ticketCounts.child  + ' = ₹' + (ticketCounts.child  * price) + '\n' : '')
     + (ticketCounts.senior > 0 ? '  • Senior x' + ticketCounts.senior + ' = ₹' + (ticketCounts.senior * price) + '\n' : '')
     + '💰 *Total: ₹' + total + '*\n\n'
