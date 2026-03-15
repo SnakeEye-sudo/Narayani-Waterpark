@@ -492,8 +492,7 @@ var ticketCounts = { adult: 0, child: 0, senior: 0 };
 
 function changeCount(type, delta) {
   ticketCounts[type] = Math.max(0, ticketCounts[type] + delta);
-  document.getElementById(type + 'Count').textContent = ticketCounts[type];
-  updateTotal();
+var ticketCounts = { adult: 0 };  // Simplified: only persons counter  updateTotal();
 }
 
 function updateTotal() {
@@ -540,8 +539,7 @@ function updateTotal() {
   var ta = document.getElementById('totalAmount');
   var pa = document.getElementById('payuAmount');
   if (ta) ta.textContent = '₹' + total;
-  if (pa) pa.value = total;
-}
+  var total = (ticketCounts.adult || 0) * price;  // Simplified: only persons}
 
 function openBooking(type) {
   ticketCounts = { adult: 0, child: 0, senior: 0 };
