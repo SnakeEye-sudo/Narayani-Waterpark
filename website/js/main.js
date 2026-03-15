@@ -492,8 +492,7 @@ var ticketCounts = { adult: 0, child: 0, senior: 0 };
 
 function changeCount(type, delta) {
   ticketCounts[type] = Math.max(0, ticketCounts[type] + delta);
-var ticketCounts = { adult: 0 };  // Simplified: only persons counter  updateTotal();
-}
+    updateTotal();}
 
 function updateTotal() {
   var dateStr = document.getElementById('bookingDate') ? document.getElementById('bookingDate').value : '';
@@ -539,9 +538,7 @@ function updateTotal() {
   var ta = document.getElementById('totalAmount');
   var pa = document.getElementById('payuAmount');
   if (ta) ta.textContent = '₹' + total;
-  var total = (ticketCounts.adult || 0) * price;  // Simplified: only persons}
 
-function openBooking(type) {
   ticketCounts = { adult: 0, child: 0, senior: 0 };
   if (type === 'adult') ticketCounts.adult = 1;
   if (type === 'child') ticketCounts.child = 1;
