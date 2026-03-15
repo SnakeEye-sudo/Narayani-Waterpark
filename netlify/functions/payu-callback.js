@@ -200,7 +200,7 @@ exports.handler = async (event) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            from: 'Narayani Waterpark <onboarding@resend.dev>',
+            from: 'Narayani Waterpark <tickets@narayaniwaterpark.com>',
             to: [email],
             subject: `Your Ticket is Ready! Booking ID: ${bookingId} | Narayani Waterpark`,
             html: ticketHTML
