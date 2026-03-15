@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Ticket - Narayani Waterpark</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #e0f2fe, #eff6ff); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .card { background: white; padding: 36px 32px; border-radius: 20px; text-align: center; max-width: 480px; width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,.12); }
+    .icon { font-size: 56px; margin-bottom: 10px; }
+    h1 { color: #16a34a; font-size: 22px; margin-bottom: 6px; }
+    .sub { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+    .search-box { display: flex; gap: 8px; margin-bottom: 28px; }
+    .search-box input { flex: 1; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; outline: none; text-transform: uppercase; letter-spacing: 1px; }
+    .search-box input:focus { border-color: #3b82f6; }
+    .search-box button { padding: 12px 20px; background: #1a56db; color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    .search-box button:hover { background: #1e40af; }
+    #result { display: none; }
+    .ticket-card { background: #f0fdf4; border: 2px solid #22c55e; border-radius: 14px; padding: 20px; margin-bottom: 16px; text-align: left; }
+    .ticket-card.invalid { background: #fef2f2; border-color: #ef4444; }
+    .status-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+    .status-valid { background: #dcfce7; color: #15803d; }
+    .status-invalid { background: #fee2e2; color: #dc2626; }
+    .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e5e7eb; font-size: 14px; }
+    .row:last-child { border-bottom: none; }
+    .row .k { color: #6b7280; }
+    .row .v { color: #111827; font-weight: 600; }
+    .qr-section { text-align: center; margin-top: 14px; }
+    .qr-section img { width: 120px; height: 120px; }
+    .error-box { background: #fef2f2; border: 2px solid #ef4444; border-radius: 12px; padding: 16px; color: #dc2626; font-size: 14px; }
+    .loading { color: #6b7280; font-size: 14px; }
+    .admin-note { background: #fffbeb; border: 1px solid #fbbf24; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #92400e; margin-top: 16px; }
+    .mark-used-btn { margin-top: 14px; padding: 10px 20px; background: #ef4444; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; width: 100%; }
+    .mark-used-btn:hover { background: #dc2626; }
+    .park-info { color: #9ca3af; font-size: 11px; margin-top: 20px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🎡</div>
+    <h1>Narayani Waterpark</h1>
+    <p class="sub">Ticket Verification System</p>
+    <div class="search-box">
+      <input type="text" id="bookingInput" placeholder="Enter Booking ID..." maxlength="20">
+      <button onclick="verifyTicket()">Verify</button>
+    </div>
+    <div id="loading" class="loading" style="display:none">Checking ticket...</div>
+    <div id="result"></div>
+    <div class="park-info">
+      Narayani Waterpark, Bettiah, Bihar<br>
+      📞 +91 8434057242 | 🌐 narayaniwaterpark.com
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://porqrcrujtcnlhniclaf.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvcnFyY3J1anRjbmxobmljbGFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODQ4MzIsImV4cCI6MjA4OTA2MDgzMn0.-ObI1DY4v8zOvNOCzXB0PFn_v41_PCmw-XB4GIZ7RV8';
+
+    // Allow Enter key
+    document.getElementById('bookingInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') verifyTicket();
+    });
+
+    // Auto-fill from URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoId = urlParams.get('id');
+    if (autoId) {
+      document.getElementById('bookingInput').value = autoId.toUpperCase();
+      verifyTicket();
+    }
+
+    async function verifyTicket() {
+      const bookingId = document.getElementById('bookingInput').value.trim().toUpperCase();
+      const resultDiv = document.getElementById('result');
+      const loadingDiv = document.getElementById('loading');
+
+      if (!bookingId) {
+        resultDiv.innerHTML = '<div class="error-box">Please enter a Booking ID.</div>';
+        resultDiv.style.display = 'block';
+        return;
+      }
+
+      resultDiv.style.display = 'none';
+      loadingDiv.style.display = 'block';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/bookings?booking_id=eq.${encodeURIComponent(bookingId)}&select=*`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        loadingDiv.style.display = 'none';
+
+        if (!res.ok) throw new Error('API error');
+        const data = await res.json();
+
+        if (!data || data.length === 0) {
+          resultDiv.innerHTML = '<div class="error-box">❌ Booking ID not found. Please check and try again.</div>';
+          resultDiv.style.display = 'block';
+          return;
+        }
+
+        const b = data[0];
+        const isValid = b.entry_status === 'VALID';
+        const visitDate = b.visit_date ? new Date(b.visit_date).toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
+        const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(bookingId)}&choe=UTF-8`;
+        const ticketLine = [b.adults > 0 ? `${b.adults} Adult(s)` : '', b.children > 0 ? `${b.children} Child(ren)` : ''].filter(Boolean).join(' + ') || '1 Ticket';
+
+        resultDiv.innerHTML = `
+          <div class="ticket-card ${isValid ? '' : 'invalid'}">
+            <span class="status-badge ${isValid ? 'status-valid' : 'status-invalid'}">${isValid ? '✓ VALID TICKET' : '✗ ALREADY USED / INVALID'}</span>
+            <div class="row"><span class="k">Booking ID</span><span class="v">${b.booking_id}</span></div>
+            <div class="row"><span class="k">Visitor Name</span><span class="v">${b.name || 'N/A'}</span></div>
+            <div class="row"><span class="k">Mobile</span><span class="v">${b.phone || 'N/A'}</span></div>
+            <div class="row"><span class="k">Visit Date</span><span class="v">${visitDate}</span></div>
+            <div class="row"><span class="k">Tickets</span><span class="v">${ticketLine}</span></div>
+            <div class="row"><span class="k">Amount Paid</span><span class="v">₹${b.amount} PAID</span></div>
+            <div class="row"><span class="k">Transaction ID</span><span class="v" style="font-size:12px">${b.txn_id || 'N/A'}</span></div>
+            <div class="qr-section">
+              <img src="${qrUrl}" alt="QR">
+              <div style="font-size:11px;color:#6b7280;margin-top:4px">Entry QR Code</div>
+            </div>
+          </div>
+          ${isValid ? `<button class="mark-used-btn" onclick="markUsed('${b.booking_id}')">Mark as USED (After Entry)</button>` : ''}
+          <div class="admin-note">⚠️ Admin use only — gate verification system</div>
+        `;
+        resultDiv.style.display = 'block';
+      } catch (err) {
+        loadingDiv.style.display = 'none';
+        resultDiv.innerHTML = '<div class="error-box">Connection error. Please check internet and try again.</div>';
+        resultDiv.style.display = 'block';
+      }
+    }
+
+    async function markUsed(bookingId) {
+      if (!confirm(`Mark booking ${bookingId} as USED? This cannot be undone.`)) return;
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/bookings?booking_id=eq.${encodeURIComponent(bookingId)}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ entry_status: 'USED' })
+        });
+        if (res.ok) {
+          alert('Ticket marked as USED successfully!');
+          verifyTicket();
+        } else {
+          alert('Error updating ticket. Try again.');
+        }
+      } catch (err) {
+        alert('Connection error.');
+      }
+    }
+  </script>
+</body>
+</html>
