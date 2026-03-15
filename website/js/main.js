@@ -202,41 +202,48 @@ function initScrollAnimations() {
 // ============================================================
 // WATER EFFECTS (Ripples & Bubbles)
 // ============================================================
-function initWaterEffects() {
-  const container = document.getElementById('ripple-container');
-  if (!container) return;
-
-  // Ripples on click
-  window.addEventListener('mousedown', (e) => createRipple(e, container));
-  
-  // Occasional bubbles
-  setInterval(() => createBubble(container), 3000);
-
-  // Fish Mascot Following Cursor
-  const mascot = document.getElementById('mascot');
-  if (mascot) {
-    mascot.style.visibility = 'visible';
-    let mouseX = 0, mouseY = 0;
-    let mascotX = 0, mascotY = 0;
-    
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateMascot() {
-      mascotX += (mouseX - mascotX) * 0.08;
-      mascotY += (mouseY - mascotY) * 0.08;
-      
-      // Face direction of travel
-      const flip = (mouseX > mascotX + 5) ? 'scaleX(-1)' : (mouseX < mascotX - 5) ? 'scaleX(1)' : mascot.style.transform.includes('scaleX(-1)') ? 'scaleX(-1)' : 'scaleX(1)';
-      mascot.style.transform = `translate3d(${mascotX - 45}px, ${mascotY - 45}px, 0) ${flip}`;
-      
-      requestAnimationFrame(animateMascot);
+// Fish Mascot - Mobile: Auto-roam, Desktop: Mouse Follow
+    const mascot = document.getElementById('mascot');
+    if (mascot) {
+      mascot.style.visibility = 'visible';
+      const isMobile = window.innerWidth < 1024 || ('ontouchstart' in window);
+      if (isMobile) {
+        // --- MOBILE: Auto-roam across full screen ---
+        let mX = Math.random() * window.innerWidth;
+        let mY = Math.random() * window.innerHeight;
+        let vX = (Math.random() * 2 + 1.5) * (Math.random() < 0.5 ? 1 : -1);
+        let vY = (Math.random() * 2 + 1.5) * (Math.random() < 0.5 ? 1 : -1);
+        const SIZE = 65;
+        function roamMascot() {
+          mX += vX;
+          mY += vY;
+          if (mX < 0) { mX = 0; vX = Math.abs(vX); }
+          if (mX > window.innerWidth - SIZE) { mX = window.innerWidth - SIZE; vX = -Math.abs(vX); }
+          if (mY < 0) { mY = 0; vY = Math.abs(vY); }
+          if (mY > window.innerHeight - SIZE) { mY = window.innerHeight - SIZE; vY = -Math.abs(vY); }
+          const flip = vX > 0 ? 'scaleX(-1)' : 'scaleX(1)';
+          mascot.style.transform = `translate3d(${mX}px, ${mY}px, 0) ${flip}`;
+          requestAnimationFrame(roamMascot);
+        }
+        roamMascot();
+      } else {
+        // --- DESKTOP: Follow mouse ---
+        let mouseX = 0, mouseY = 0;
+        let mascotX = 0, mascotY = 0;
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+        function animateMascot() {
+          mascotX += (mouseX - mascotX) * 0.08;
+          mascotY += (mouseY - mascotY) * 0.08;
+          const flip = (mouseX > mascotX + 5) ? 'scaleX(-1)' : (mouseX < mascotX - 5) ? 'scaleX(1)' : mascot.style.transform.includes('scaleX(-1)') ? 'scaleX(-1)' : 'scaleX(1)';
+          mascot.style.transform = `translate3d(${mascotX - 45}px, ${mascotY - 45}px, 0) ${flip}`;
+          requestAnimationFrame(animateMascot);
+        }
+        animateMascot();
+      }
     }
-    animateMascot();
-  }
-}
 
 function createRipple(e, container) {
   const ripple = document.createElement('div');
