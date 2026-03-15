@@ -826,3 +826,9 @@ body.dark-mode .legal-box p, body.dark-mode .legal-box li { color: #ccc; }
     transform: translateX(5px);
   }
 }
+
+/* ===== INSTAGRAM SECTION FIX ===== */
+#instagram .section-header { opacity:1!important; visibility:visible!important; transform:none!important; }
+.insta-item { opacity:1!important; visibility:visible!important; transform:none!important; border-radius:12px; overflow:hidden; background:var(--light); }
+.insta-item img { width:100%; height:100%; object-fit:cover; }
+.insta-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:12px; margin-top:28px; }
