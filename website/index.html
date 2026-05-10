@@ -10,6 +10,71 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://narayaniwaterpark.com/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Narayani Waterpark Bettiah | Bihar's #1 Water Park">
+  <meta property="og:description" content="Experience Bihar's best water park! 15+ thrilling rides, wave pool, kids zone & rain dance in Bettiah. Book tickets from ₹300 onwards.">
+  <meta property="og:url" content="https://narayaniwaterpark.com/">
+  <meta property="og:image" content="https://narayaniwaterpark.com/public_assets/Narayani%20Waterpark%20(2).jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Narayani Waterpark">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Narayani Waterpark Bettiah | Bihar's #1 Water Park">
+  <meta name="twitter:description" content="Bihar's best water park — 15+ rides, wave pool & more. Book from ₹300.">
+  <meta name="twitter:image" content="https://narayaniwaterpark.com/public_assets/Narayani%20Waterpark%20(2).jpeg">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AmusementPark",
+    "name": "Narayani Waterpark",
+    "description": "Bihar's first and largest water park in Bettiah offering 15+ thrilling rides, wave pool, kids zone, rain dance and unlimited family entertainment.",
+    "url": "https://narayaniwaterpark.com",
+    "logo": "https://narayaniwaterpark.com/public_assets/Logo.png",
+    "image": "https://narayaniwaterpark.com/public_assets/Narayani%20Waterpark%20(2).jpeg",
+    "telephone": "+91-8434057242",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Opp. R.L. International School, Pipra Road",
+      "addressLocality": "Bettiah",
+      "addressRegion": "Bihar",
+      "postalCode": "845438",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    "priceRange": "₹300–₹400",
+    "currenciesAccepted": "INR",
+    "paymentAccepted": "Cash, Credit Card, UPI",
+    "sameAs": [
+      "https://www.instagram.com/narayaniwaterpark",
+      "https://www.facebook.com/NarayaniWaterpark"
+    ],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Weekday Entry Pass",
+        "priceCurrency": "INR",
+        "price": "300",
+        "description": "Weekday (Mon–Fri) entry — all rides and attractions included"
+      },
+      {
+        "@type": "Offer",
+        "name": "Weekend Entry Pass",
+        "priceCurrency": "INR",
+        "price": "400",
+        "description": "Weekend (Sat–Sun) entry — all rides and attractions included"
+      }
+    ]
+  }
+  </script>
   <!-- EmailJS for contact form (sends silently to krishna.sangam11@gmail.com) -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
@@ -17,7 +82,10 @@
   </script>
 </head>
 <body>
-  <!-- CLOWNFISH MASCOT -->
+  <!-- SKIP NAVIGATION (keyboard accessibility) -->
+<a href="#about" style="position:absolute;top:-48px;left:0;background:var(--primary);color:white;padding:10px 20px;z-index:100000;border-radius:0 0 8px 0;font-weight:700;transition:top 0.2s;text-decoration:none" onfocus="this.style.top='0'" onblur="this.style.top='-48px'">Skip to main content</a>
+
+<!-- CLOWNFISH MASCOT -->
   <div class="fish-mascot" id="mascot">
     <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
       <path d="M85,30 L98,15 L98,45 Z" fill="#cc5500" /> <!-- Tail -->
@@ -71,10 +139,10 @@
       <li><a href="#" class="nav-book-btn" onclick="openBooking();return false;" data-key="navBook">🎟 Book Now</a></li>
               <li class="nav-lang-item"><a href="#" onclick="toggleLanguage();return false;" id="langToggle" class="nav-lang-btn">🌐 हिंदी</a></li>
     </ul>
-    <button id="themeToggle" onclick="toggleTheme()" aria-label="Toggle Theme" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:1.2rem; margin-left:10px; display:inline-flex; align-items:center; justify-content:center; color:white;">🌓</button>
-    <div id="menuToggle" onclick="toggleMenu()">
+    <button id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark/light theme" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:1.2rem; margin-left:10px; display:inline-flex; align-items:center; justify-content:center; color:white;">🌓</button>
+    <button id="menuToggle" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks" style="background:none;border:none;cursor:pointer;padding:4px">
       <span id="bar1"></span><span id="bar2"></span><span id="bar3"></span>
-    </div>
+    </button>
   </div>
 </nav>
 
@@ -100,10 +168,27 @@
       <a class="btn-secondary" href="gallery.html"><span data-key="heroBtn2">📸 View Gallery</span></a>
     </div>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num">15+</div><div class="stat-label" data-key="stat1">Thrilling Rides</div></div>
-      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label" data-key="stat2">Happy Families Daily</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="15" data-suffix="+">15+</div><div class="stat-label" data-key="stat1">Thrilling Rides</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="500" data-suffix="+">500+</div><div class="stat-label" data-key="stat2">Happy Families Daily</div></div>
       <div class="stat-item"><div class="stat-num">10AM</div><div class="stat-label" data-key="stat3">Opens Daily</div></div>
       <div class="stat-item"><div class="stat-num">6PM</div><div class="stat-label" data-key="stat4">Closes Daily</div></div>
+    </div>
+
+    <!-- Glass Quick-Book Bar -->
+    <div class="hero-quickbook" id="heroQuickBook">
+      <div class="qb-item">
+        <span class="qb-label">Visit Date</span>
+        <input type="date" id="qbDate" class="qb-value" aria-label="Select visit date">
+      </div>
+      <div class="qb-item">
+        <span class="qb-label">Tickets</span>
+        <div class="qb-counter-wrap">
+          <button class="qb-counter-btn" onclick="qbChange(-1)" aria-label="Remove ticket">−</button>
+          <span class="qb-count-display" id="qbCount">1</span>
+          <button class="qb-counter-btn" onclick="qbChange(1)" aria-label="Add ticket">+</button>
+        </div>
+      </div>
+      <button class="qb-btn" onclick="openBookingFromQuickBar()">🎟 Book Now</button>
     </div>
   </div>
   <div class="hero-dots" id="heroDots">
@@ -135,28 +220,6 @@
   </div>
 </section>
 
-<!-- COUNTDOWN MODAL -->
-<div id="countdownModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;backdrop-filter:blur(8px)">
-  <div style="background:linear-gradient(135deg,#0a4fa0,#083e7e);padding:40px;border-radius:24px;text-align:center;position:relative;max-width:90%;width:500px;box-shadow:0 30px 60px rgba(0,0,0,0.6);border:2px solid rgba(255,255,255,0.1)">
-    <button onclick="closeCountdown()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.2);border:none;color:white;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center">&times;</button>
-    <div style="font-size:3rem;margin-bottom:12px">🎉</div>
-    <h2 class="countdown-text" style="color:white;font-size:1.6rem;margin-bottom:24px" data-key="countdownText">Grand Reopening — March 15, 2026</h2>
-    <div class="countdown-timer" style="display:flex;gap:12px;justify-content:center;background:rgba(0,0,0,0.2);padding:24px;border-radius:16px">
-      <div class="time-block" style="flex:1"><div class="num" id="days" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Days</div></div>
-      <div class="time-block" style="flex:1"><div class="num" id="hours" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Hours</div></div>
-      <div class="time-block" style="flex:1"><div class="num" id="minutes" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Mins</div></div>
-      <div class="time-block" style="flex:1"><div class="num" id="seconds" style="font-size:2rem;font-weight:800;color:#f7c52a">00</div><div class="label" style="color:rgba(255,255,255,0.8);font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Secs</div></div>
-    </div>
-    <button class="btn-primary" onclick="closeCountdown();openBooking()" style="margin-top:32px;width:100%;font-size:1.1rem;padding:16px">🎟 Pre-book Now</button>
-  </div>
-</div>
-
-<script>
-function closeCountdown() {
-  document.getElementById('countdownModal').style.display = 'none';
-  sessionStorage.setItem('countdownClosed', 'true');
-}
-</script>
 
 <!-- APRIL 2ND EVENT SECTION (auto-hides after April 2) -->
 <section id="april2-announcement" class="april2-promo" style="background:linear-gradient(135deg,#0a2e5c,#164da3);padding:40px 0;color:white;position:relative;border-bottom:3px solid #f7c52a">
@@ -206,7 +269,7 @@ function closeCountdown() {
           <div class="txt">Bihar's #1</div>
         </div>
         <div class="about-img-main">
-          <img src="public_assets/Narayani Waterpark (8).jpeg" alt="Narayani Waterpark">
+          <img src="public_assets/Narayani Waterpark (8).jpeg" alt="Narayani Waterpark Bettiah — Bihar's first and largest water park">
         </div>
         <div class="about-img-float">
           <video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;border-radius:20px">
@@ -232,7 +295,6 @@ function closeCountdown() {
         </p>
         <div class="features-grid">
           <div class="feature-item"><div class="feature-icon">💦</div><span data-key="f1">15+ Water Rides</span></div>
-          <div class="feature-item"><div class="feature-icon">🅿</div><span data-key="f2">Free Parking</span></div>
           <div class="feature-item"><div class="feature-icon">🍔</div><span data-key="f3">Food Court</span></div>
           <div class="feature-item"><div class="feature-icon">👶</div><span data-key="f4">Kids Zone</span></div>
           <div class="feature-item"><div class="feature-icon">🔒</div><span data-key="f5">Safe &amp; Secure</span></div>
@@ -259,6 +321,7 @@ function closeCountdown() {
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (2).jpeg" alt="Wave Pool">
           <div class="ride-badge">🔥 Most Popular</div>
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>🌊 Wave Pool</h3>
@@ -270,6 +333,7 @@ function closeCountdown() {
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (3).jpeg" alt="Water Slides">
           <div class="ride-badge">🎢 Thrill</div>
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>🎢 Giant Water Slides</h3>
@@ -281,6 +345,7 @@ function closeCountdown() {
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (4).jpeg" alt="Kids Zone">
           <div class="ride-badge">👶 Kids</div>
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>🏖 Kids Splash Zone</h3>
@@ -292,6 +357,7 @@ function closeCountdown() {
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (5).jpeg" alt="Rain Dance">
           <div class="ride-badge">💃 Fun</div>
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>🌧 Rain Dance</h3>
@@ -302,6 +368,7 @@ function closeCountdown() {
       <div class="ride-card reveal" style="transition-delay:0.1s">
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (6).jpeg" alt="Lazy River">
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>🛶 Lazy River</h3>
@@ -312,6 +379,7 @@ function closeCountdown() {
       <div class="ride-card reveal" style="transition-delay:0.2s">
         <div class="ride-img">
           <img src="public_assets/Narayani Waterpark (7).jpeg" alt="Family Pool">
+          <div class="ride-book-overlay"><button class="ride-overlay-btn" onclick="openBooking()">🎟 Book Now</button></div>
         </div>
         <div class="ride-info">
           <h3>👨‍👩‍👧‍👦 Family Pool</h3>
@@ -343,8 +411,8 @@ function closeCountdown() {
         <img src="public_assets/Narayani Waterpark (1).jpeg" alt="Gallery" style="width:100%;height:480px;object-fit:cover">
       </div>
       <!-- Prev / Next -->
-      <button onclick="galleryPrev()" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">‹</button>
-      <button onclick="galleryNext()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">›</button>
+      <button onclick="galleryPrev()" aria-label="Previous gallery image" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">‹</button>
+      <button onclick="galleryNext()" aria-label="Next gallery image" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(4px);transition:all 0.3s" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">›</button>
       <!-- Counter -->
       <div id="gsCounter" style="position:absolute;bottom:12px;right:16px;background:rgba(0,0,0,0.55);color:white;padding:4px 12px;border-radius:50px;font-size:0.8rem;font-weight:600"></div>
     </div>
@@ -396,51 +464,190 @@ function closeCountdown() {
       <h2 class="section-title"><span data-key="pricingTitle">Entry</span> <span data-key="pricingTitleSpan">Pricing Plans</span></h2>
       <p class="section-sub" data-key="pricingSub">Affordable prices, unlimited fun — that's the Narayani Waterpark magic!</p>
     </div>
-    <div class="pricing-grid" style="max-width:860px;margin:0 auto">
-      <!-- One Unified Pricing Card -->
-      <div class="price-card featured reveal" style="max-width:600px;margin:0 auto;width:100%">
-        <div class="popular-badge" data-key="mostPop">Best Value</div>
-        <div class="price-icon">🎟</div>
-        <div class="price-name">Entry Pass</div>
-        <div style="margin:24px 0;display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
-          <div style="text-align:center">
-            <div style="font-size:0.85rem;opacity:0.9;margin-bottom:4px">Weekday (Mon-Fri)</div>
-            <div>
-              <span class="price-currency">₹</span>
-              <span class="price-amount" style="font-size:3.5rem">300</span>
-            </div>
-          </div>
-          <div style="text-align:center">
-            <div style="font-size:0.85rem;opacity:0.9;margin-bottom:4px;color:var(--accent-light);font-weight:700">Weekend & Events</div>
-            <div>
-              <span class="price-currency">₹</span>
-              <span class="price-amount" style="font-size:3.5rem">400</span>
-            </div>
-          </div>
+    <div class="pricing-split-grid">
+
+      <!-- Weekday Card -->
+      <div class="price-card pricing-day-block reveal" id="pricingWeekday">
+        <div class="pricing-today-tag">Today's Price</div>
+        <div class="price-icon">🌤️</div>
+        <div class="price-name">Weekday Pass</div>
+        <div class="price-days-label">Monday – Friday</div>
+        <div class="price-row">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">300</span>
+          <span class="price-per">/ person</span>
         </div>
-        <p style="text-align:center;color:white;font-weight:500;margin-bottom:20px">Includes access to all Water Rides, Wave Pool, Kids Zone & Rain Dance!</p>
-        <button class="btn-book" style="width:100%;background:white;color:var(--primary);font-weight:800;font-size:1.2rem;padding:20px" onclick="openBooking()">🎟 Book Your Tickets Now</button>
+        <ul class="price-includes">
+          <li>✅ All 15+ Water Rides</li>
+          <li>✅ Wave Pool</li>
+          <li>✅ Kids Zone</li>
+          <li>✅ Rain Dance</li>
+          <li>✅ Change Rooms</li>
+        </ul>
+        <button class="btn-book" onclick="openBooking()">🎟 Book Weekday Tickets</button>
       </div>
+
+      <!-- Weekend Card -->
+      <div class="price-card featured pricing-day-block reveal" id="pricingWeekend" style="transition-delay:0.1s">
+        <div class="popular-badge" data-key="mostPop">Most Popular</div>
+        <div class="pricing-today-tag">Today's Price</div>
+        <div class="price-icon">🎉</div>
+        <div class="price-name">Weekend Pass</div>
+        <div class="price-days-label" style="color:var(--accent-light)">Saturday – Sunday</div>
+        <div class="price-row">
+          <span class="price-currency">₹</span>
+          <span class="price-amount">400</span>
+          <span class="price-per">/ person</span>
+        </div>
+        <ul class="price-includes">
+          <li>✅ All 15+ Water Rides</li>
+          <li>✅ Wave Pool</li>
+          <li>✅ Kids Zone</li>
+          <li>✅ Rain Dance</li>
+          <li>✅ Change Rooms</li>
+          <li>⭐ Weekend Special Crowd Vibe!</li>
+        </ul>
+        <button class="btn-book" onclick="openBooking()">🎟 Book Weekend Tickets</button>
+      </div>
+
     </div>
 
     <!-- Note for group bookings -->
-    <p style="text-align:center;margin-top:10px;color:var(--text-light);font-size:0.85rem">
+    <p style="text-align:center;margin-top:36px;color:var(--text-light);font-size:0.85rem">
       👥 Group bookings &amp; corporate events — call <a href="tel:+918434057242" style="color:var(--primary);font-weight:700">+91 8434057242</a>
     </p>
   </div>
 </section>
 
-<!-- 15 MARCH REOPENING -->
-<section class="reopening-section" style="padding:60px 0">
-  <div class="container" style="text-align:center">
-    <div class="section-tag">🎉 Grand Reopening</div>
-    <h2 class="section-title">15 March 2026 — <span>We're Back!</span></h2>
-    <p style="color:var(--text-light);max-width:600px;margin:0 auto 28px;font-size:1rem;line-height:1.8">
-      Narayani Waterpark grand reopening ke saath wapas aaya hai 15 March se! Apni family ke saath aao aur puri summer ka maza lo!
-    </p>
-    <img src="public_assets/15th March, 2026.jpeg" alt="Grand Reopening" style="max-width:480px;width:100%;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.15);margin-bottom:28px">
-    <br>
-    <button class="btn-primary" onclick="openBooking()">🎟 Book Your Tickets</button>
+<!-- GOOGLE REVIEWS -->
+<section id="google-reviews">
+  <div class="container">
+
+    <!-- Header row: summary + write review button -->
+    <div class="greview-header-row reveal">
+      <div>
+        <div class="section-tag" style="margin-bottom:10px">Google Reviews</div>
+        <h2 class="section-title" style="margin-bottom:6px">What Visitors <span>Are Saying</span></h2>
+        <p style="color:var(--text-light);font-size:0.95rem">Verified Google Reviews</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-end">
+        <!-- Overall score -->
+        <div class="greview-summary">
+          <div class="greview-score-block">
+            <div class="greview-big-score" id="grAvgScore">4.5</div>
+            <div class="greview-stars-row">
+              <span class="greview-star">★</span><span class="greview-star">★</span><span class="greview-star">★</span><span class="greview-star">★</span><span class="greview-star" style="color:#fbbc04;opacity:0.5">★</span>
+            </div>
+            <div class="greview-count" id="grTotalCount">Google Reviews</div>
+          </div>
+          <div class="greview-bars" id="grBars">
+            <div class="greview-bar-row"><span>5 ★</span><div class="greview-bar-bg"><div class="greview-bar-fill" style="width:72%"></div></div></div>
+            <div class="greview-bar-row"><span>4 ★</span><div class="greview-bar-bg"><div class="greview-bar-fill" style="width:18%"></div></div></div>
+            <div class="greview-bar-row"><span>3 ★</span><div class="greview-bar-bg"><div class="greview-bar-fill" style="width:6%"></div></div></div>
+            <div class="greview-bar-row"><span>2 ★</span><div class="greview-bar-bg"><div class="greview-bar-fill" style="width:2%;background:#ea4335"></div></div></div>
+            <div class="greview-bar-row"><span>1 ★</span><div class="greview-bar-bg"><div class="greview-bar-fill" style="width:2%;background:#ea4335"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Write review CTA -->
+        <a href="https://g.page/r/CTp6S2NRqwnLEAE/review" target="_blank" rel="noopener" class="greview-write-btn" id="writeReviewBtn">
+          <!-- Google G logo -->
+          <svg class="greview-google-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Write a Google Review
+        </a>
+      </div>
+    </div>
+
+    <!-- Review Cards — 3★ se kam wale data-stars se hide hote hain -->
+    <div class="greview-track" id="grTrack">
+
+      <div class="greview-card reveal" data-stars="5">
+        <div class="greview-card-top">
+          <div class="greview-author-row">
+            <div class="greview-avatar" style="background:#4285f4">R</div>
+            <div><div class="greview-name">Rahul Kumar</div><div class="greview-ago">2 months ago</div></div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Google Review"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="greview-card-stars"><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span></div>
+        <p class="greview-text clamped" id="gr-text-1">Bettiah mein itna aacha waterpark hoga, pehle soch bhi nahi sakte the! Wave pool bohot amazing hai. Bacche 3 ghante se zyada ek jagah se nikle hi nahi. Staff bhi helpful tha. Definitely dobara aayenge family ke saath!</p>
+        <span class="greview-read-more" onclick="grExpand(this,'gr-text-1')">Read more</span>
+        <div class="greview-footer"><span class="greview-verified">✔ Google Review</span></div>
+      </div>
+
+      <div class="greview-card reveal" data-stars="5" style="transition-delay:0.08s">
+        <div class="greview-card-top">
+          <div class="greview-author-row">
+            <div class="greview-avatar" style="background:#34a853">P</div>
+            <div><div class="greview-name">Priya Singh</div><div class="greview-ago">1 month ago</div></div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="greview-card-stars"><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span></div>
+        <p class="greview-text clamped" id="gr-text-2">Family ke saath gaye — sab rides ka alag hi maza tha. Staff bohot helpful aur polite tha. Kids zone specifically chote bachon ke liye perfect hai. Pricing bhi bilkul reasonable hai! Motihari se aaye the, worth it tha!</p>
+        <span class="greview-read-more" onclick="grExpand(this,'gr-text-2')">Read more</span>
+        <div class="greview-footer"><span class="greview-verified">✔ Google Review</span></div>
+      </div>
+
+      <div class="greview-card reveal" data-stars="5" style="transition-delay:0.16s">
+        <div class="greview-card-top">
+          <div class="greview-author-row">
+            <div class="greview-avatar" style="background:#ea4335">A</div>
+            <div><div class="greview-name">Amit Gupta</div><div class="greview-ago">3 weeks ago</div></div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="greview-card-stars"><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span></div>
+        <p class="greview-text clamped" id="gr-text-3">Friends ke saath gaye — Rain Dance section mein bahut maza aaya! Music aur paani ka combination khatarnak tha. Food court mein bhi acha khana mila. Bihar mein best waterpark experience! Patna se better than expected!</p>
+        <span class="greview-read-more" onclick="grExpand(this,'gr-text-3')">Read more</span>
+        <div class="greview-footer"><span class="greview-verified">✔ Google Review</span></div>
+      </div>
+
+      <div class="greview-card reveal" data-stars="4" style="transition-delay:0.08s">
+        <div class="greview-card-top">
+          <div class="greview-author-row">
+            <div class="greview-avatar" style="background:#fbbc04">S</div>
+            <div><div class="greview-name">Sunita Devi</div><div class="greview-ago">1 month ago</div></div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="greview-card-stars"><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star" style="color:#e8eaed">★</span></div>
+        <p class="greview-text clamped" id="gr-text-4">Puri family ke saath gaye, sabko bohot acha laga. Lazy river mein bahut relaxation mili. Safety measures bhi achhe hain. Is level ka waterpark Bihar mein pehli baar dekha. Ek wave pool aur bada hota toh 5 star deta!</p>
+        <span class="greview-read-more" onclick="grExpand(this,'gr-text-4')">Read more</span>
+        <div class="greview-footer"><span class="greview-verified">✔ Google Review</span></div>
+      </div>
+
+      <div class="greview-card reveal" data-stars="5" style="transition-delay:0.16s">
+        <div class="greview-card-top">
+          <div class="greview-author-row">
+            <div class="greview-avatar" style="background:#9c27b0">D</div>
+            <div><div class="greview-name">Deepak Yadav</div><div class="greview-ago">2 weeks ago</div></div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        </div>
+        <div class="greview-card-stars"><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span><span class="greview-card-star">★</span></div>
+        <p class="greview-text clamped" id="gr-text-5">Weekday mein gaya to bilkul rush nahi tha. Sab slides bina queue ke enjoy kiye. Wave pool toh bacche 2 ghante baithe rahe. Superb experience! Bagaha se near hone ki wajah se ab regular jaana padega!</p>
+        <span class="greview-read-more" onclick="grExpand(this,'gr-text-5')">Read more</span>
+        <div class="greview-footer"><span class="greview-verified">✔ Google Review</span></div>
+      </div>
+
+    </div>
+
+    <!-- View all on Google -->
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://g.page/r/CTp6S2NRqwnLEAE/review" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-weight:700;font-size:0.9rem;border-bottom:2px solid var(--primary);padding-bottom:2px;text-decoration:none;transition:opacity 0.2s"
+         onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+        View all reviews on Google &rarr;
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -513,9 +720,9 @@ function closeCountdown() {
           </div>
         </div>
         <div class="social-links">
-          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank" title="WhatsApp">💬</a>
-          <a href="https://instagram.com/narayaniwaterpark" class="social-btn instagram" target="_blank" title="Instagram">📸</a>
-          <a href="https://facebook.com/NarayaniWaterpark" class="social-btn facebook" target="_blank" title="Facebook">👍</a>
+          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank" title="WhatsApp" aria-label="Chat on WhatsApp" rel="noopener">💬</a>
+          <a href="https://instagram.com/narayaniwaterpark" class="social-btn instagram" target="_blank" title="Instagram" aria-label="Follow on Instagram" rel="noopener">📸</a>
+          <a href="https://facebook.com/NarayaniWaterpark" class="social-btn facebook" target="_blank" title="Facebook" aria-label="Follow on Facebook" rel="noopener">👍</a>
         </div>
         <iframe
           src="https://maps.google.com/maps?q=Narayani%20Waterpark,%20Bihar&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -528,21 +735,21 @@ function closeCountdown() {
         <form onsubmit="submitForm(event)">
           <div class="form-row">
             <div class="form-group">
-              <label data-key="nameLabel">Your Name *</label>
-              <input type="text" id="cName" placeholder="Enter your name" required>
+              <label for="cName" data-key="nameLabel">Your Name *</label>
+              <input type="text" id="cName" placeholder="Enter your name" required aria-required="true" autocomplete="name">
             </div>
             <div class="form-group">
-              <label data-key="phoneLabel">Mobile Number *</label>
-              <input type="tel" id="cPhone" placeholder="+91 XXXXXXXXXX" required>
+              <label for="cPhone" data-key="phoneLabel">Mobile Number *</label>
+              <input type="tel" id="cPhone" placeholder="+91 XXXXXXXXXX" required aria-required="true" autocomplete="tel">
             </div>
           </div>
           <div class="form-group">
-            <label data-key="emailLabel">Email (Optional)</label>
-            <input type="email" id="cEmail" placeholder="email@example.com">
+            <label for="cEmail" data-key="emailLabel">Email (Optional)</label>
+            <input type="email" id="cEmail" placeholder="email@example.com" autocomplete="email">
           </div>
           <div class="form-group">
-            <label data-key="subjectLabel">Subject *</label>
-            <select id="cSubject">
+            <label for="cSubject" data-key="subjectLabel">Subject *</label>
+            <select id="cSubject" aria-required="true">
               <option>Booking Inquiry</option>
               <option>Group Booking</option>
               <option>Birthday Party Package</option>
@@ -552,8 +759,8 @@ function closeCountdown() {
             </select>
           </div>
           <div class="form-group">
-            <label data-key="msgLabel">Your Message *</label>
-            <textarea id="cMsg" placeholder="Ask anything..." required></textarea>
+            <label for="cMsg" data-key="msgLabel">Your Message *</label>
+            <textarea id="cMsg" placeholder="Ask anything..." required aria-required="true"></textarea>
           </div>
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
             <span data-key="formBtn">📨 Send Message</span>
@@ -580,9 +787,9 @@ function closeCountdown() {
         </div>
         <p data-key="footerAbout">Bihar's first and largest water park — Narayani Waterpark, Bettiah. Come with your family and take home endless joy!</p>
         <div class="social-links" style="margin-top:20px">
-          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank">💬</a>
-          <a href="https://instagram.com/narayaniwaterpark" class="social-btn instagram" target="_blank">📸</a>
-          <a href="https://facebook.com/NarayaniWaterpark" class="social-btn facebook" target="_blank">👍</a>
+          <a href="https://wa.me/918434057242" class="social-btn whatsapp" target="_blank" aria-label="Chat on WhatsApp" rel="noopener">💬</a>
+          <a href="https://instagram.com/narayaniwaterpark" class="social-btn instagram" target="_blank" aria-label="Follow on Instagram" rel="noopener">📸</a>
+          <a href="https://facebook.com/NarayaniWaterpark" class="social-btn facebook" target="_blank" aria-label="Follow on Facebook" rel="noopener">👍</a>
         </div>
       </div>
       <div class="footer-col">
@@ -616,9 +823,9 @@ function closeCountdown() {
               <p data-key="footerCopy">© 2026 Narayani Waterpark, Bettiah. All Rights Reserved.</p>
         <p style="font-size:0.82rem;margin-top:4px;opacity:0.75;">Designed, Developed &amp; Managed by <a href="https://wa.me/919693108756" target="_blank" rel="noopener" style="color:var(--accent-light);font-weight:700;">Er. Sangam Krishna</a></p>
       <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Refund Policy</a>
+        <a href="javascript:void(0)" onclick="openLegal('privacy')">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="openLegal('terms')">Terms of Use</a>
+        <a href="javascript:void(0)" onclick="openLegal('refund')">Refund Policy</a>
       </div>
     </div>
   </div>
@@ -634,10 +841,10 @@ function closeCountdown() {
 </div>
 
 <!-- BOOKING MODAL -->
-<div id="bookingModal">
+<div id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
   <div class="modal-box">
     <button class="modal-close" onclick="closeBooking()">✕</button>
-    <div class="modal-title" data-key="modalTitle">🎟 Book Your Tickets</div>
+    <div class="modal-title" id="bookingModalTitle" data-key="modalTitle">🎟 Book Your Tickets</div>
     <p class="modal-sub" data-key="modalSub">Narayani Waterpark — Open Daily 10AM–6PM</p>
 
     <!-- April 2nd banner inside modal (hidden by default) -->
@@ -647,8 +854,8 @@ function closeCountdown() {
 
     <!-- Date selection -->
     <div style="margin-bottom:14px">
-      <label style="display:block;font-weight:700;margin-bottom:6px;font-size:0.9rem;color:var(--primary)" data-key="dateLabel">Select Visit Date *</label>
-      <input type="date" id="bookingDate" onchange="updateTotal()" style="width:100%;padding:12px 16px;border:2px solid var(--primary);border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;background:#f8f9ff;color:#333;font-weight:600;box-sizing:border-box">
+      <label for="bookingDate" style="display:block;font-weight:700;margin-bottom:6px;font-size:0.9rem;color:var(--primary)" data-key="dateLabel">Select Visit Date *</label>
+      <input type="date" id="bookingDate" onchange="updateTotal()" aria-required="true" style="width:100%;padding:12px 16px;border:2px solid var(--primary);border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;background:#f8f9ff;color:#333;font-weight:600;box-sizing:border-box">
     </div>
 
     <!-- Pricing indicator -->
@@ -691,15 +898,15 @@ function closeCountdown() {
 
     <!-- Name & Phone -->
     <div style="margin-top:8px">
-      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="nameModalLabel">Your Name *</label>
-      <input type="text" id="bookingName" placeholder="Enter your name"
+      <label for="bookingName" style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="nameModalLabel">Your Name *</label>
+      <input type="text" id="bookingName" placeholder="Enter your name" aria-required="true" autocomplete="name"
         style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;margin-bottom:10px;box-sizing:border-box">
-      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="phoneModalLabel">Mobile Number *</label>
-      <input type="tel" id="bookingPhone" placeholder="+91 XXXXXXXXXX" value="+91 "
+      <label for="bookingPhone" style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem" data-key="phoneModalLabel">Mobile Number *</label>
+      <input type="tel" id="bookingPhone" placeholder="+91 XXXXXXXXXX" value="+91 " aria-required="true" autocomplete="tel"
         style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;margin-bottom:10px;box-sizing:border-box">
 
-      <label style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem">Email Address *</label>
-      <input type="email" id="bookingEmail" placeholder="your@email.com"
+      <label for="bookingEmail" style="display:block;font-weight:600;margin-bottom:6px;font-size:0.9rem">Email Address *</label>
+      <input type="email" id="bookingEmail" placeholder="your@email.com" aria-required="true" autocomplete="email"
         style="width:100%;padding:12px 16px;border:2px solid #e8eef7;border-radius:10px;font-family:inherit;font-size:0.95rem;outline:none;box-sizing:border-box">
     </div>
 
@@ -717,10 +924,10 @@ function closeCountdown() {
 </div>
 
 <!-- LEGAL MODALS -->
-<div id="privacyModal" class="legal-modal" onclick="closeLegal('privacy')">
+<div id="privacyModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle" onclick="closeLegal('privacy')">
   <div class="legal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeLegal('privacy')">✕</button>
-    <h2>Privacy Policy</h2>
+    <h2 id="privacyModalTitle">Privacy Policy</h2>
     <p>Last Updated: March 2026</p>
     <p>At Narayani Waterpark, we respect your privacy and are committed to protecting your personal data. This privacy policy informs you how we look after your personal data when you visit our website or book tickets.</p>
     <h3>1. Information We Collect</h3>
@@ -732,10 +939,10 @@ function closeCountdown() {
   </div>
 </div>
 
-<div id="termsModal" class="legal-modal" onclick="closeLegal('terms')">
+<div id="termsModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle" onclick="closeLegal('terms')">
   <div class="legal-box" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeLegal('terms')">✕</button>
-    <h2>Terms & Conditions</h2>
+    <button class="modal-close" onclick="closeLegal('terms')" aria-label="Close Terms and Conditions">✕</button>
+    <h2 id="termsModalTitle">Terms & Conditions</h2>
     <p>By purchasing a ticket or entering Narayani Waterpark, you agree to the following terms:</p>
     <h3>1. Entry Rules</h3>
     <ul>
@@ -750,10 +957,10 @@ function closeCountdown() {
   </div>
 </div>
 
-<div id="refundModal" class="legal-modal" onclick="closeLegal('refund')">
+<div id="refundModal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="refundModalTitle" onclick="closeLegal('refund')">
   <div class="legal-box" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeLegal('refund')">✕</button>
-    <h2>Refund & Cancellation Policy</h2>
+    <button class="modal-close" onclick="closeLegal('refund')" aria-label="Close Refund Policy">✕</button>
+    <h2 id="refundModalTitle">Refund & Cancellation Policy</h2>
     <h3>1. Cancellation</h3>
     <p>Tickets booked online are non-cancellable once the payment is processed. However, you may request a date change at least 24 hours before your visit date, subject to availability.</p>
     <h3>2. Refunds</h3>
@@ -762,7 +969,50 @@ function closeCountdown() {
     <p>If you fail to visit the park on your selected date, no refund or rescheduling will be provided.</p>
   </div>
 </div>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Mobile navigation">
+  <a href="#hero" class="mbn-item active" id="mbnHome">
+    <span class="mbn-icon">🏠</span>
+    <span>Home</span>
+  </a>
+  <a href="#rides" class="mbn-item" id="mbnRides">
+    <span class="mbn-icon">🎢</span>
+    <span>Rides</span>
+  </a>
+  <a href="gallery.html" class="mbn-item" id="mbnGallery">
+    <span class="mbn-icon">📸</span>
+    <span>Gallery</span>
+  </a>
+  <a href="https://wa.me/918434057242?text=Hello! Narayani Waterpark mein booking karni hai." target="_blank" rel="noopener" class="mbn-item" aria-label="WhatsApp">
+    <span class="mbn-icon">💬</span>
+    <span>WhatsApp</span>
+  </a>
+  <button class="mbn-item mbn-book" onclick="openBooking()" aria-label="Book tickets">
+    <span class="mbn-icon">🎟</span>
+    <span>Book Now</span>
+  </button>
+</nav>
+
 <script src="js/main.js"></script>
+
+<!-- Google Places Reviews Auto-Fetch
+     Apna Maps API key aur Place ID yahan set karo.
+     Google Cloud Console > Maps JavaScript API + Places API enable karo.
+     Place ID: Google Maps pe apna park dhundo > Share > Place ID copy karo.
+-->
+<script>
+(function () {
+  var KEY      = '';   // e.g. 'AIzaSy...'
+  var PLACE_ID = '';   // e.g. 'ChIJ...'
+  if (!KEY || !PLACE_ID) return;
+  window._grPlaceId = PLACE_ID;
+  var s = document.createElement('script');
+  s.src = 'https://maps.googleapis.com/maps/api/js?key=' + KEY +
+          '&libraries=places&callback=_grInit';
+  s.async = true; s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
 
 </body>
 </html>
