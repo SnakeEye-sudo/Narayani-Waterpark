@@ -11,7 +11,7 @@ var translations = {
     heroBadge: '🎉 Grand Reopening — March 15, 2026',
     heroTitle: "Bihar's Most Amazing Water Park!", heroTitleSpan: 'Bettiah!',
     heroSub: 'Thrilling rides, family fun, and memories for a lifetime — only at Narayani Waterpark, Bettiah!',
-    heroBtn1: '🎟 Book Now — ₹400 Onwards',
+    heroBtn1: '🎟 Book Now — ₹300 Onwards',
     heroBtn2: '📸 View Gallery',
     stat1: 'Thrilling Rides', stat2: 'Happy Families Daily', stat3: 'Opens Daily', stat4: 'Closes Daily',
     countdownOpen: '🎉 Park is NOW OPEN! Come Join Us!',
@@ -31,7 +31,7 @@ var translations = {
     galleryBtn: '📱 Join Us at the Park!',
     pricingTag: 'Tickets', pricingTitle: 'Entry', pricingTitleSpan: 'Pricing Plans',
     pricingSub: 'Affordable prices, unlimited fun — that\'s the Narayani Waterpark magic!',
-    pricingNote: '🌟 Weekdays (Mon–Fri): ₹400 per person &nbsp;|&nbsp; Weekends & Public Holidays (Sat/Sun): ₹500 per person',
+    pricingNote: '🌟 Weekdays (Mon–Fri): ₹300 per person &nbsp;|&nbsp; Weekends & Public Holidays (Sat/Sun): ₹400 per person',
     priceWeekday: 'Weekday', priceWeekend: 'Weekend',
     priceChild: 'Children', priceChildAge: 'Per Child (Under 12)',
     priceAdult: 'Adult', priceAdultAge: 'Per Person (12+ Years)',
@@ -71,7 +71,7 @@ var translations = {
     heroBadge: '🎉 ग्रैंड रीओपनिंग — 15 मार्च 2026',
     heroTitle: 'बिहार का सबसे मस्त वाटर पार्क!', heroTitleSpan: 'बेतिया!',
     heroSub: 'थ्रिलिंग राइड्स, फैमिली फन और यादगार लम्हें — सिर्फ नारायणी वाटर पार्क, बेतिया में!',
-    heroBtn1: '🎟 अभी बुक करें — ₹400 से शुरू',
+    heroBtn1: '🎟 अभी बुक करें — ₹300 से शुरू',
     heroBtn2: '📸 गैलरी देखें',
     stat1: 'थ्रिलिंग राइड्स', stat2: 'खुश परिवार रोज', stat3: 'खुलने का समय', stat4: 'बंद होने का समय',
     countdownOpen: '🎉 पार्क अभी खुला है! आइए मिलिए!',
@@ -90,7 +90,7 @@ var translations = {
     galleryBtn: '📱 पार्क में आइए!',
     pricingTag: 'टिकट', pricingTitle: 'प्रवेश', pricingTitleSpan: 'मूल्य योजनाएं',
     pricingSub: 'किफायती कीमत में अनलिमिटेड मज़ा — यही नारायणी का जादू है!',
-    pricingNote: '🌟 वीकडे (सोम–शुक्र): ₹400 प्रति व्यक्ति &nbsp;|&nbsp; वीकेंड व छुट्टियाँ (शनि/रवि): ₹500 प्रति व्यक्ति',
+    pricingNote: '🌟 वीकडे (सोम–शुक्र): ₹300 प्रति व्यक्ति &nbsp;|&nbsp; वीकेंड व छुट्टियाँ (शनि/रवि): ₹400 प्रति व्यक्ति',
     priceWeekday: 'वीकडे', priceWeekend: 'वीकेंड',
     priceChild: 'बच्चे (12 से कम)', priceChildAge: 'प्रति बच्चा',
     priceAdult: 'वयस्क', priceAdultAge: 'प्रति व्यक्ति (12+ वर्ष)',
@@ -179,6 +179,8 @@ window.addEventListener('load', function () {
     initGallerySlider();
     initWaterEffects();
     initScrollAnimations();
+    shuffleInstagramGrid();
+    initButtonRipples();
   }, 1400);
 });
 
@@ -194,6 +196,29 @@ function initScrollAnimations() {
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Auto-popup gallery once per session
+  if (!sessionStorage.getItem('galleryAutoPop2')) {
+    const gallerySection = document.getElementById('gallery');
+    if (gallerySection) {
+      const gObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            sessionStorage.setItem('galleryAutoPop2', 'true');
+            const firstImg = document.querySelector('#gsDisplay img');
+            if (firstImg) {
+               const lb = document.getElementById('lightbox');
+               document.getElementById('lightboxImg').src = firstImg.src;
+               lb.style.display = 'flex';
+               document.body.style.overflow = 'hidden';
+            }
+            gObs.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      gObs.observe(gallerySection);
+    }
+  }
 }
 
 // ============================================================
@@ -254,6 +279,39 @@ function createRipple(e, container) {
   ripple.style.top = `${e.clientY - size/2}px`;
   container.appendChild(ripple);
   ripple.addEventListener('animationend', () => ripple.remove());
+}
+
+// Button Ripples for extra waterpark vibe
+function initButtonRipples() {
+  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-book').forEach(btn => {
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.addEventListener('click', function(e) {
+      let rect = this.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      let ripple = document.createElement('span');
+      ripple.className = 'btn-ripple-effect';
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+}
+
+// Instagram Shuffle (Fallback if Widget not used)
+function shuffleInstagramGrid() {
+  const grid = document.querySelector('.insta-grid');
+  if (!grid) return;
+  const items = Array.from(grid.children);
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  // Remove existing and append shuffled
+  grid.innerHTML = '';
+  items.forEach(item => grid.appendChild(item));
 }
 
 function createBubble(container) {
@@ -478,8 +536,8 @@ function checkApril2Promotions() {
 // ============================================================
 // PRICING — Uniform: Weekday ₹400, Weekend ₹500
 // ============================================================
-var PRICE_WEEKDAY = 400;
-var PRICE_WEEKEND = 500;
+var PRICE_WEEKDAY = 300;
+var PRICE_WEEKEND = 400;
 
 function getPriceForDate(dateStr) {
   if (!dateStr) return PRICE_WEEKDAY;
@@ -520,13 +578,13 @@ function updateTotal() {
       ind.textContent = '📅 Select a date to see pricing';
     } else if (isApril2) {
       ind.className = 'special';
-      ind.textContent = '⭐ April 2 — Mahi & Manisha Special Day! ₹500/person';
+      ind.textContent = '⭐ April 2 — Mahi & Manisha Special Day! ₹400/person';
     } else if (isWeekend) {
       ind.className = 'weekend';
-      ind.textContent = '🎉 Weekend Rate: ₹500 per ticket (Sat/Sun)';
+      ind.textContent = '🎉 Weekend Rate: ₹400 per ticket (Sat/Sun)';
     } else {
       ind.className = 'weekday';
-      ind.textContent = '📅 Weekday Rate: ₹400 per ticket (Mon–Fri)';
+      ind.textContent = '📅 Weekday Rate: ₹300 per ticket (Mon–Fri)';
     }
   }
 

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Gallery | Narayani Waterpark</title>
+  <meta name="description" content="View our massive collection of photos, videos, and Instagram moments at Narayani Waterpark, Bettiah.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="public_assets/Logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 20px;
+      padding: 20px;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      cursor: pointer;
+      position: relative;
+      background: #000;
+    }
+    .masonry-item img, .masonry-item video {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .masonry-item:hover img, .masonry-item:hover video {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: rgba(255,255,255,0.9);
+      pointer-events: none;
+      text-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    @media(max-width: 992px) { .masonry-grid { column-count: 2; } }
+    @media(max-width: 600px) { .masonry-grid { column-count: 1; } }
+  </style>
+</head>
+<body style="background: var(--bg-color);">
+
+<!-- NAVBAR -->
+<nav id="navbar" class="scrolled" style="background:var(--white);box-shadow:0 4px 20px rgba(0,0,0,0.05)">
+  <div class="nav-container">
+    <a class="nav-logo" href="index.html">
+      <div class="logo-box">
+        <img src="public_assets/Logo.png" alt="Narayani Waterpark" class="main-logo">
+        <span class="logo-text">Narayani Waterpark</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#rides">Rides</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div id="menuToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span id="bar1"></span><span id="bar2" style="margin:5px 0"></span><span id="bar3"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section style="padding: 150px 0 60px 0; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%); text-align: center; color: white;">
+  <h1 style="font-size: 3.5rem; font-family: 'Playfair Display', serif; margin-bottom:10px; text-shadow: 0 4px 15px rgba(0,0,0,0.3);">Park <span>Moments</span></h1>
+  <p style="font-size: 1.2rem; opacity: 0.9;">Relive the joy, the splash, and the thrilling memories.</p>
+</section>
+
+<!-- Masonry Content -->
+<section style="padding: 60px 0;">
+  <div class="container">
+    <div class="masonry-grid">
+       
+       <!-- VIDEOS -->
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (1).mp4', 'video')">
+         <video src="public_assets/Narayani Waterpark (1).mp4" muted loop></video>
+         <div class="play-icon">▶</div>
+       </div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (2).mp4', 'video')">
+         <video src="public_assets/Narayani Waterpark (2).mp4" muted loop></video>
+         <div class="play-icon">▶</div>
+       </div>
+       
+       <!-- IMAGES -->
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (1).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (1).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (2).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (2).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (3).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (3).jpeg"></div>
+       
+       <!-- MORE VIDEOS -->
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (3).mp4', 'video')">
+         <video src="public_assets/Narayani Waterpark (3).mp4" muted loop></video>
+         <div class="play-icon">▶</div>
+       </div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/WhatsApp Video 2026-03-14 at 08.02.04.mp4', 'video')">
+         <video src="public_assets/WhatsApp Video 2026-03-14 at 08.02.04.mp4" muted loop></video>
+         <div class="play-icon">▶</div>
+       </div>
+
+       <!-- MORE IMAGES -->
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (4).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (4).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (5).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (5).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (6).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (6).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (7).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (7).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (8).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (8).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (9).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (9).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (10).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (10).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/Narayani Waterpark (11).jpeg', 'image')"><img src="public_assets/Narayani Waterpark (11).jpeg"></div>
+       
+       <!-- APRIL 2ND -->
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/2nd April, 2026 (1).jpeg', 'image')"><img src="public_assets/2nd April, 2026 (1).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/2nd April, 2026 (2).jpeg', 'image')"><img src="public_assets/2nd April, 2026 (2).jpeg"></div>
+       <div class="masonry-item" onclick="openMediaLightbox('public_assets/2nd April, 2026 (3).jpeg', 'image')"><img src="public_assets/2nd April, 2026 (3).jpeg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="mediaLightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;align-items:center;justify-content:center;flex-direction:column;">
+  <!-- Click handler on background to close -->
+  <div style="position:absolute;inset:0;" onclick="closeMediaLightbox()"></div>
+  
+  <div style="position:relative; z-index:100000; width:90%; max-height:90vh; display:flex; justify-content:center; align-items:center;">
+    <!-- Prev Button -->
+    <button onclick="prevMedia(event)" style="position:absolute;left:-40px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:2rem;cursor:pointer;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:0.3s;z-index:100002" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">‹</button>
+
+    <img id="mlbImg" src="" style="max-width:100%;max-height:90vh;border-radius:12px;display:none;box-shadow:0 10px 40px rgba(0,0,0,0.5);">
+    <video id="mlbVid" src="" controls autoplay style="max-width:100%;max-height:90vh;border-radius:12px;display:none;box-shadow:0 10px 40px rgba(0,0,0,0.5);"></video>
+
+    <!-- Next Button -->
+    <button onclick="nextMedia(event)" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:2rem;cursor:pointer;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:0.3s;z-index:100002" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">›</button>
+  </div>
+  <span style="position:absolute;top:20px;right:30px;color:white;font-size:2.5rem;cursor:pointer;z-index:100001;" onclick="closeMediaLightbox()">✕</span>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--primary-dark);color:white;padding:40px 0;text-align:center;">
+  <p>© 2026 Narayani Waterpark, Bettiah. All Rights Reserved.</p>
+</footer>
+
+<script>
+  let mediaItems = [];
+  let currentIndex = 0;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.masonry-item').forEach((item, index) => {
+      let isVideo = item.querySelector('video') !== null;
+      let src = isVideo ? item.querySelector('video').getAttribute('src') : item.querySelector('img').getAttribute('src');
+      mediaItems.push({ type: isVideo ? 'video' : 'image', src: src });
+      
+      // Override inline onclick with our indexed version
+      item.onclick = function(e) {
+        e.preventDefault();
+        openMediaLightboxByIndex(index);
+      };
+    });
+  });
+
+  function openMediaLightboxByIndex(index) {
+    if (index < 0) index = mediaItems.length - 1;
+    if (index >= mediaItems.length) index = 0;
+    currentIndex = index;
+    
+    var item = mediaItems[currentIndex];
+    var lb = document.getElementById('mediaLightbox');
+    var img = document.getElementById('mlbImg');
+    var vid = document.getElementById('mlbVid');
+    
+    img.style.display = 'none';
+    vid.style.display = 'none';
+    vid.pause();
+    img.src = '';
+    vid.src = '';
+    
+    if (item.type === 'image') {
+      img.src = item.src;
+      img.style.display = 'block';
+    } else {
+      vid.src = item.src;
+      vid.style.display = 'block';
+    }
+    
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function nextMedia(e) {
+    if(e) e.stopPropagation();
+    openMediaLightboxByIndex(currentIndex + 1);
+  }
+
+  function prevMedia(e) {
+    if(e) e.stopPropagation();
+    openMediaLightboxByIndex(currentIndex - 1);
+  }
+  
+  function closeMediaLightbox() {
+    document.getElementById('mediaLightbox').style.display = 'none';
+    document.body.style.overflow = '';
+    var vid = document.getElementById('mlbVid');
+    vid.pause();
+    vid.src = '';
+  }
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeMediaLightbox();
+    if (e.key === 'ArrowRight' && document.getElementById('mediaLightbox').style.display === 'flex') nextMedia();
+    if (e.key === 'ArrowLeft' && document.getElementById('mediaLightbox').style.display === 'flex') prevMedia();
+  });
+  
+  // Play videos on hover for masonry items
+  document.querySelectorAll('.masonry-item video').forEach(v => {
+    v.addEventListener('mouseenter', () => { v.play().catch(e=>{}); });
+    v.addEventListener('mouseleave', () => { v.pause(); });
+  });
+</script>
+</body>
+</html>
