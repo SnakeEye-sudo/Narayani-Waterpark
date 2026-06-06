@@ -11,7 +11,7 @@ var translations = {
     heroBadge: '🎉 Grand Reopening — March 15, 2026',
     heroTitle: "Bihar's Most Amazing Water Park!", heroTitleSpan: 'Bettiah!',
     heroSub: 'Thrilling rides, family fun, and memories for a lifetime — only at Narayani Waterpark, Bettiah!',
-    heroBtn1: '🎟 Book Now — ₹300 Onwards',
+    heroBtn1: '🎟 Entry ₹400 — All Days',
     heroBtn2: '📸 View Gallery',
     stat1: 'Thrilling Rides', stat2: 'Happy Families Daily', stat3: 'Opens Daily', stat4: 'Closes Daily',
     countdownOpen: '🎉 Park is NOW OPEN! Come Join Us!',
@@ -31,7 +31,7 @@ var translations = {
     galleryBtn: '📱 Join Us at the Park!',
     pricingTag: 'Tickets', pricingTitle: 'Entry', pricingTitleSpan: 'Pricing Plans',
     pricingSub: 'Affordable prices, unlimited fun — that\'s the Narayani Waterpark magic!',
-    pricingNote: '🌟 Weekdays (Mon–Fri): ₹300 per person &nbsp;|&nbsp; Weekends & Public Holidays (Sat/Sun): ₹400 per person',
+    pricingNote: '🎟 Entry ₹400 per person — all days. Tickets available at the park counter only.',
     priceWeekday: 'Weekday', priceWeekend: 'Weekend',
     priceChild: 'Children', priceChildAge: 'Per Child (Under 12)',
     priceAdult: 'Adult', priceAdultAge: 'Per Person (12+ Years)',
@@ -71,7 +71,7 @@ var translations = {
     heroBadge: '🎉 ग्रैंड रीओपनिंग — 15 मार्च 2026',
     heroTitle: 'बिहार का सबसे मस्त वाटर पार्क!', heroTitleSpan: 'बेतिया!',
     heroSub: 'थ्रिलिंग राइड्स, फैमिली फन और यादगार लम्हें — सिर्फ नारायणी वाटर पार्क, बेतिया में!',
-    heroBtn1: '🎟 अभी बुक करें — ₹300 से शुरू',
+    heroBtn1: '🎟 एंट्री ₹400 — सभी दिन',
     heroBtn2: '📸 गैलरी देखें',
     stat1: 'थ्रिलिंग राइड्स', stat2: 'खुश परिवार रोज', stat3: 'खुलने का समय', stat4: 'बंद होने का समय',
     countdownOpen: '🎉 पार्क अभी खुला है! आइए मिलिए!',
@@ -90,7 +90,7 @@ var translations = {
     galleryBtn: '📱 पार्क में आइए!',
     pricingTag: 'टिकट', pricingTitle: 'प्रवेश', pricingTitleSpan: 'मूल्य योजनाएं',
     pricingSub: 'किफायती कीमत में अनलिमिटेड मज़ा — यही नारायणी का जादू है!',
-    pricingNote: '🌟 वीकडे (सोम–शुक्र): ₹300 प्रति व्यक्ति &nbsp;|&nbsp; वीकेंड व छुट्टियाँ (शनि/रवि): ₹400 प्रति व्यक्ति',
+    pricingNote: '🎟 एंट्री ₹400 प्रति व्यक्ति — सभी दिन। टिकट सिर्फ पार्क काउंटर पर उपलब्ध।',
     priceWeekday: 'वीकडे', priceWeekend: 'वीकेंड',
     priceChild: 'बच्चे (12 से कम)', priceChildAge: 'प्रति बच्चा',
     priceAdult: 'वयस्क', priceAdultAge: 'प्रति व्यक्ति (12+ वर्ष)',
@@ -501,19 +501,15 @@ function checkApril2Promotions() {
 
 
 // ============================================================
-// PRICING — Weekday ₹300 (Mon–Fri), Weekend ₹400 (Sat–Sun)
+// PRICING — Flat ₹400 entry on all days (tickets at counter)
 // ============================================================
-var PRICE_WEEKDAY = 300;
-var PRICE_WEEKEND = 400;
+// Flat pricing — ₹400 every day (no weekday/weekend split)
+var PRICE_FLAT = 400;
+var PRICE_WEEKDAY = PRICE_FLAT; // kept for backward compatibility
+var PRICE_WEEKEND = PRICE_FLAT; // kept for backward compatibility
 
 function getPriceForDate(dateStr) {
-  if (!dateStr) return PRICE_WEEKDAY;
-  var d = new Date(dateStr);
-  // April 2, 2026 is a special event day → always ₹500
-  if (d.getFullYear() === 2026 && d.getMonth() === 3 && d.getDate() === 2) return PRICE_WEEKEND;
-  var day = d.getDay(); // 0=Sun, 6=Sat
-  if (day === 0 || day === 6) return PRICE_WEEKEND;
-  return PRICE_WEEKDAY;
+  return PRICE_FLAT; // same price on all days
 }
 
 
@@ -537,22 +533,8 @@ function updateTotal() {
   // Price indicator colour
   var ind = document.getElementById('priceIndicator');
   if (ind) {
-    var d2 = dateStr ? new Date(dateStr) : null;
-    var isApril2 = d2 && d2.getFullYear() === 2026 && d2.getMonth() === 3 && d2.getDate() === 2;
-    var isWeekend = d2 && (d2.getDay() === 0 || d2.getDay() === 6);
-    if (!dateStr) {
-      ind.className = '';
-      ind.textContent = '📅 Select a date to see pricing';
-    } else if (isApril2) {
-      ind.className = 'special';
-      ind.textContent = '⭐ April 2 — Mahi & Manisha Special Day! ₹400/person';
-    } else if (isWeekend) {
-      ind.className = 'weekend';
-      ind.textContent = '🎉 Weekend Rate: ₹400 per ticket (Sat/Sun)';
-    } else {
-      ind.className = 'weekday';
-      ind.textContent = '📅 Weekday Rate: ₹300 per ticket (Mon–Fri)';
-    }
+    ind.className = '';
+    ind.textContent = '🎟 Entry ₹400 per person (all days) — tickets at the park counter';
   }
 
   // April 2nd info banner inside modal
@@ -631,134 +613,18 @@ function showToast(msg, type) {
 // ============================================================
 // LEGAL MODALS
 // ============================================================
-function openLegal(id) {
-  document.getElementById(id + 'Modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLegal(id) {
-  document.getElementById(id + 'Modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-
-// ============================================================
-// PAYU PAYMENT (Issue #6)
-// PayU OAuth Credentials provided:
-// Client ID:     2fed7e33abe5db09b124afdc0cbcd85d7fdf251f79f8bdf3e1d084d1d4247d04
-// Client Secret: 1f4863450c1dea84e550d2984f1409ae7153c20609fd53f42e59c2a44b96a759
-// NOTE: These are OAuth credentials for PayU Biz APIs.
-// For payment gateway integration, you also need: Merchant Key + Salt (from PayU dashboard).
-// Hash MUST be generated server-side. Until server-side hash is ready, WhatsApp fallback is used.
+// TICKETS — Online payment disabled (counter-only)
 // ============================================================
 function proceedToPay() {
-  var name    = document.getElementById('bookingName').value.trim();
-  var phone   = document.getElementById('bookingPhone').value.trim();
-  var dateStr = document.getElementById('bookingDate').value;
-  var price   = getPriceForDate(dateStr);
-  var totalTickets = (ticketCounts.adult || 0) + (ticketCounts.child || 0) + (ticketCounts.senior || 0);
-  var total   = totalTickets * price;
-
-  var email = (document.getElementById('bookingEmail') || {}).value || '';
-  email = email.trim();
-  if (!email) email = 'guest@narayaniwaterpark.com';
-
-  if (!name)  { showToast(currentLang==='hi'?'कृपया अपना नाम लिखें!':'Please enter your name!', 'error'); return; }
-  if (!phone || phone.replace(/\D/g,'').length < 10) { showToast(currentLang==='hi'?'कृपया सही मोबाइल नंबर लिखें!':'Please enter a valid 10-digit mobile number!', 'error'); return; }
-  if (!dateStr) { showToast(currentLang==='hi'?'कृपया यात्रा की तारीख चुनें!':'Please select your visit date!', 'error'); return; }
-  if (total === 0) { showToast(currentLang==='hi'?'कृपया कम से कम एक टिकट चुनें!':'Please select at least 1 ticket!', 'error'); return; }
-
-  var txnId = 'NWP' + Date.now();
-  var ticketDesc = [];
-  if (ticketCounts.adult  > 0) ticketDesc.push('Person x' + ticketCounts.adult);
-  if (ticketCounts.child  > 0) ticketDesc.push('Child x' + ticketCounts.child);
-  if (ticketCounts.senior > 0) ticketDesc.push('Senior x' + ticketCounts.senior);
-  var productInfo = 'NWP ' + ticketDesc.join(',') + ' Date:' + dateStr;
-  var formattedTotal = Number(total).toFixed(2);
-
-  document.getElementById('txnid').value       = txnId;
-  document.getElementById('payuAmount').value  = formattedTotal;
-  document.getElementById('productinfo').value = productInfo;
-  document.getElementById('payuName').value    = name;
-  document.getElementById('payuPhone').value   = phone;
-  document.getElementById('payuEmail').value   = email;
-
-  var btn = document.querySelector('.pay-btn');
-  var origText = btn ? btn.innerHTML : '';
-  if (btn) { btn.innerHTML = '⏳ Processing...'; btn.disabled = true; }
-
-  // Fetch hash from Netlify Function
-  var controller = new AbortController();
-  var timeoutId  = setTimeout(function() { controller.abort(); }, 15000); // 15s timeout
-
-  fetch('/api/payu-hash', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    signal: controller.signal,
-    body: JSON.stringify({
-      txnId: txnId,
-      amount: formattedTotal,
-      productInfo: productInfo,
-      firstName: name,
-      email: email,
-      phone: phone
-    })
-  })
-  .then(function(res) {
-    clearTimeout(timeoutId);
-    if (!res.ok) throw new Error('Server returned ' + res.status);
-    return res.json();
-  })
-  .then(function(data) {
-    if (data.hash && data.key) {
-      document.getElementById('payuHash').value = data.hash;
-      document.getElementById('payuKey').value  = data.key;
-      document.getElementById('payuForm').submit();
-    } else {
-      throw new Error(data.error || 'Hash missing in response');
-    }
-  })
-  .catch(function(err) {
-    clearTimeout(timeoutId);
-    console.error('PayU hash error:', err.message);
-    var msg = err.name === 'AbortError'
-      ? 'Request timed out. Please retry.'
-      : ('Error: ' + err.message);
-    showToast(msg, 'error');
-    if (btn) { btn.innerHTML = origText; btn.disabled = false; }
-  });
+  // Online payment disabled — tickets are sold at the park counter only.
+  showToast(currentLang==='hi' ? 'ऑनलाइन बुकिंग बंद है — टिकट काउंटर पर मिलेंगे!' : 'Online booking is disabled — tickets available at the park counter only!', 'info');
 }
 
 function bookViaWhatsApp() {
-  var name  = document.getElementById('bookingName').value.trim();
-  var phone = document.getElementById('bookingPhone').value.trim();
-  var dateStr = document.getElementById('bookingDate').value;
-  var price = getPriceForDate(dateStr);
-  var total = ticketCounts.adult * price;
-
-  if (!name)    { showToast(currentLang==='hi'?'कृपया अपना नाम लिखें!':'Please enter your name!', 'error'); return; }
-  if (!dateStr) { showToast(currentLang==='hi'?'कृपया यात्रा की तारीख चुनें!':'Please select your visit date!', 'error'); return; }
-  if (total === 0) { showToast(currentLang==='hi'?'कृपया कम से कम एक टिकट चुनें!':'Please select at least one ticket!', 'error'); return; }
-
-  var d = new Date(dateStr);
-  var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  var dayName = days[d.getDay()];
-  var isWeekend = d.getDay() === 0 || d.getDay() === 6;
-
-  var msg = '🎟 *BOOKING REQUEST — Narayani Waterpark, Bettiah*\n\n'
-    + '👤 Name: ' + name + '\n'
-    + '📞 Phone: ' + phone + '\n'
-    + '📅 Visit Date: ' + dateStr + ' (' + dayName + ' — ' + (isWeekend ? 'Weekend' : 'Weekday') + ')\n'
-    + '💰 Ticket Rate: ₹' + price + ' per person\n'
-    + '🎫 Tickets:\n'
-    + (ticketCounts.adult  > 0 ? '  • Person x'  + ticketCounts.adult  + ' = ₹' + (ticketCounts.adult  * price) + '\n' : '')
-    + (ticketCounts.child  > 0 ? '  • Child x'  + ticketCounts.child  + ' = ₹' + (ticketCounts.child  * price) + '\n' : '')
-    + (ticketCounts.senior > 0 ? '  • Senior x' + ticketCounts.senior + ' = ₹' + (ticketCounts.senior * price) + '\n' : '')
-    + '💰 *Total: ₹' + total + '*\n\n'
-    + '✅ Kripya booking confirm karein!';
-
+  // Online booking disabled — open a general WhatsApp enquiry instead.
+  var msg = '🎟 *Narayani Waterpark, Bettiah*\n\nNamaste! Mujhe park ke baare mein jaankari chahiye.\nEntry: ₹400 per person (all days).\nTickets counter par milte hain.';
   window.open('https://wa.me/918434057242?text=' + encodeURIComponent(msg), '_blank');
 }
-
 
 // ============================================================
 // CONTACT FORM — Email to krishna.sangam11@gmail.com via EmailJS
@@ -883,16 +749,9 @@ function openBookingFromQuickBar() {
 
 // --- Today Pricing Highlight ---
 function highlightTodayPrice() {
-  var day = new Date().getDay();
-  var isWeekend = day === 0 || day === 6;
-  var wdEl = document.getElementById('pricingWeekday');
-  var weEl = document.getElementById('pricingWeekend');
-  if (!wdEl || !weEl) return;
-  if (isWeekend) {
-    weEl.classList.add('today-active');
-  } else {
-    wdEl.classList.add('today-active');
-  }
+  // Flat pricing — highlight the single all-days card.
+  var flat = document.getElementById('pricingFlat');
+  if (flat) flat.classList.add('today-active');
 }
 
 // --- Mobile Bottom Nav Active State ---
